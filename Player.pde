@@ -25,10 +25,6 @@ class Player extends Actor {
   
   void setVelocity() {
     super.setVelocity();
-    float preCollisionY = y;
     handleCollision(this);
-    if (y < preCollisionY) {
-      onGround = true;
-    }
   }
 }
