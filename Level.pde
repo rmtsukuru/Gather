@@ -80,7 +80,7 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
     }
     else if (actor.xVelocity > 0) {
       // Right
-      int minTileX = gridIndex(actor.x + actor.width - 1) + 1;
+      int minTileX = gridIndex(actor.x + actor.width) + 1;
       int maxTileX = gridIndex(actor.x + actor.xVelocity);
       int minTileY = gridIndex(actor.y);
       int maxTileY = gridIndex(actor.y + actor.height);
@@ -132,14 +132,11 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
         }
       }
     }
-    return actor.yVelocity;
+    return actor.yVelocity;  
   }
 }
 
 void handleCollision(Actor actor) {
-  // Horizontal
   actor.xVelocity = getCollisionVelocity(true, actor);
-  
-  // Vertical
   actor.yVelocity = getCollisionVelocity(false, actor);
 }
