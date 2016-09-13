@@ -1,6 +1,6 @@
 class Player extends Actor {
   
-  static final int SIZE = 32;
+  static final int SIZE = 30;
   static final int RADIUS = 7;
   static final float SPEED = 5;
   
@@ -17,7 +17,7 @@ class Player extends Actor {
     this.y = y;
     this.width = this.height = SIZE;
     this.speed = SPEED;
-    this.fillColor = COLOR;  
+  this.fillColor = COLOR;
     this.borderRadius = RADIUS;
     this.jumpTimer = 0;
     this.jumpMax = JUMP_TIMER_FRAMES;
