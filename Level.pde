@@ -124,7 +124,9 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
       for (int j = minTileY; j <= maxTileY; j++) {
         for (int i = minTileX; i <= maxTileX; i++) {
           if (!isPassableTile(i, j)) {
-            actor.onGround = true;
+            if (!actor.goingUp) {
+              actor.onGround = true;
+            }
             return min(tileTop(i, j) - (actor.y + actor.height), actor.yVelocity);
           }
         }
