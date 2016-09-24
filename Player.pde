@@ -33,19 +33,19 @@ class Player extends Actor {
   }
   
   void update() {
-    this.goingLeft = keyState.get(LEFT).beingHeld;
-    this.goingRight = keyState.get(RIGHT).beingHeld;
-    this.goingDown = keyState.get(DOWN).beingHeld;
-    this.goingUp = keyState.get(UP).beingHeld;
+    this.goingLeft = Input.holdKey(LEFT);
+    this.goingRight = Input.holdKey(RIGHT);
+    this.goingDown = Input.holdKey(DOWN);
+    this.goingUp = Input.holdKey(UP);
     
-    if (keyState.get(' ').pressed) {
+    if (Input.pressKey(' ')) {
       this.jumping = true;
     }
-    else if (keyState.get(' ').released) {
+    else if (Input.releaseKey(' ')) {
       this.jumping = false;
     }
     
-    if (keyState.get('z').pressed) {
+    if (Input.pressKey('z')) {
       Bullet bullet = new Bullet(facingRight);
       bullet.y = y + GUN_HEIGHT;
       if (facingRight) {
@@ -60,6 +60,6 @@ class Player extends Actor {
     }
     
     super.update();
-    resetKeys();
+    Input.resetKeys();
   }
 }

@@ -12,7 +12,7 @@ void setup() {
     frameRate(FPS);
     
     Audio.configure(this);
-    configureInput();
+    Input.configure(this);
     
     player = new Player(180, 200);
     entities = new ArrayList<Entity>(10);
