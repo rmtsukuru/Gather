@@ -80,7 +80,7 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
       for (int i = maxTileX; i >= minTileX; i--) {
         for (int j = minTileY; j <= maxTileY; j++) {
           if (!isPassableTile(i, j)) {
-            return max(actor.x - tileRight(i, j), actor.xVelocity);
+            return max(tileRight(i, j) - actor.x, actor.xVelocity);
           }
         }
       }
