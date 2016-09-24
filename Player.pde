@@ -28,4 +28,14 @@ class Player extends Actor {
     super.setVelocity();
     handleTileCollision(this);
   }
+  
+  void update() {
+    this.goingLeft = keyState.get(LEFT).beingHeld;
+    this.goingRight = keyState.get(RIGHT).beingHeld;
+    this.goingDown = keyState.get(DOWN).beingHeld;
+    this.goingUp = keyState.get(' ').beingHeld;
+    
+    super.update();
+    resetKeys();
+  }
 }
