@@ -17,12 +17,18 @@ int[][] tiles = new int[][] {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                              {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0}
                             };
 
+List<Entity> newEntities = new LinkedList();
+
 void fillMap(ArrayList<Entity> entities) {
   Entity entity = new Entity(300, 246);
   entity.fillColor = color(200, 0, 255);
   entity.width = entity.height = 80;
   entities.add(entity);
   entities.add(new Entity(120, 90));
+}
+
+void addEntity(Entity entity) {
+  newEntities.add(entity);
 }
 
 int gridIndex(float x) {
@@ -139,6 +145,12 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
 }
 
 void handleTileCollision(Actor actor) {
+  float startXVelocity = actor.xVelocity;
+  float startYVelocity = actor.yVelocity;
   actor.xVelocity = getCollisionVelocity(true, actor);
   actor.yVelocity = getCollisionVelocity(false, actor);
+  
+  if (startXVelocity != actor.xVelocity || startYVelocity != actor.yVelocity) {
+    actor.tileCollisionResponse();
+  }
 }

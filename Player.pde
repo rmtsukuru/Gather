@@ -3,6 +3,7 @@ class Player extends Actor {
   static final int SIZE = 30;
   static final int RADIUS = 7;
   static final float SPEED = 5;
+  static final int GUN_HEIGHT = 20;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   
@@ -40,6 +41,18 @@ class Player extends Actor {
     }
     else if (keyState.get(' ').released) {
       this.jumping = false;
+    }
+    
+    if (keyState.get('z').pressed) {
+      Bullet bullet = new Bullet(facingRight);
+      bullet.y = y + GUN_HEIGHT;
+      if (facingRight) {
+        bullet.x = x + this.width;
+      }
+      else {
+        bullet.x = x;
+      }
+      addEntity(bullet);
     }
     
     super.update();

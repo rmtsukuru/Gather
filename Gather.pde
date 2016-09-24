@@ -1,5 +1,9 @@
+import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
 Actor player;
-ArrayList<Entity> entities;
+List<Entity> entities;
 
 static final int FPS = 60;
 
@@ -27,8 +31,21 @@ void draw() {
     }
   }
   
-  for (Entity entity : entities) {
+  ListIterator<Entity> iterator = newEntities.listIterator();
+  while (iterator.hasNext()) {
+    Entity newEntity = iterator.next();
+    entities.add(newEntity);
+    iterator.remove();
+  }
+  
+  iterator = entities.listIterator();
+  while (iterator.hasNext()) {
+    Entity entity = iterator.next();
     entity.update();
     entity.draw();
+    
+    if (entity.deleted) {
+      iterator.remove();
+    }
   }
 }

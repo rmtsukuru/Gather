@@ -3,6 +3,7 @@ class Entity {
   int width, height, borderRadius;
   color strokeColor;
   color fillColor;
+  boolean deleted;
   
   Entity() {
     this(0, 0);
@@ -22,6 +23,7 @@ class Entity {
     width = height = size;
     this.strokeColor = strokeColor;
     this.fillColor = fillColor;
+    this.deleted = false;
   }
   
   void update() {
@@ -32,5 +34,9 @@ class Entity {
     stroke(strokeColor);
     fill(fillColor);
     rect(x, y, width, height, borderRadius);
+  }
+  
+  void delete() {
+    deleted = true;
   }
 }
