@@ -7,7 +7,7 @@ void setup() {
     size(640, 480);
     frameRate(FPS);
     
-    player = new Player(180, 180);
+    player = new Player(180, 200);
     entities = new ArrayList<Entity>(10);
     entities.add(player);
 }
