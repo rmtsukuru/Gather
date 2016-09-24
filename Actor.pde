@@ -2,6 +2,7 @@ class Actor extends Entity {
   
   boolean goingUp, goingDown, goingLeft, goingRight;
   
+  boolean facingRight;
   boolean onGround;
   
   float speed;
@@ -14,30 +15,51 @@ class Actor extends Entity {
   Actor() {
     speed = 1;
     onGround = false;
+    facingRight = false;
+  }
+  
+  boolean hasGravity() {
+    return true;
   }
   
   void setVelocity() {
-    
     xVelocity = 0;
     if (goingLeft) {
       xVelocity -= speed;
+      if (!goingRight) {
+        facingRight = false;
+      }
     }
     if (goingRight) {
       xVelocity += speed;
+      if (!goingLeft) {
+        facingRight = true;
+      }
     }
     
-    if (goingUp && onGround) {
-      onGround = false;
-      jumpTimer = jumpMax;
-    }
-    
-    if (jumpTimer > 0 && !onGround && goingUp) {
-      jumpTimer--;
-      applyGravity(false);
+    if (hasGravity()) {
+      if (goingUp && onGround) {
+        onGround = false;
+        jumpTimer = jumpMax;
+      }
+      
+      if (jumpTimer > 0 && !onGround && goingUp) {
+        jumpTimer--;
+        applyGravity(false);
+      }
+      else {
+        jumpTimer = 0;
+        applyGravity();
+      }
     }
     else {
-      jumpTimer = 0;
-      applyGravity();
+      yVelocity = 0;
+      if (goingUp) {
+        yVelocity -= speed;
+      }
+      if (goingDown) {
+        yVelocity += speed;
+      }
     }
   }
   
