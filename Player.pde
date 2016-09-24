@@ -15,9 +15,10 @@ class Player extends Actor {
   Player(int x, int y) {
     this.x = x;
     this.y = y;
-    this.width = this.height = SIZE;
+    this.width = SIZE;
+    this.height = SIZE * 2;
     this.speed = SPEED;
-  this.fillColor = COLOR;
+    this.fillColor = COLOR;
     this.borderRadius = RADIUS;
     this.jumpTimer = 0;
     this.jumpMax = JUMP_TIMER_FRAMES;
