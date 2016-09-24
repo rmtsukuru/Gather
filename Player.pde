@@ -25,6 +25,6 @@ class Player extends Actor {
   
   void setVelocity() {
     super.setVelocity();
-    handleCollision(this);
+    handleTileCollision(this);
   }
 }

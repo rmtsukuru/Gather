@@ -136,7 +136,7 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
   }
 }
 
-void handleCollision(Actor actor) {
+void handleTileCollision(Actor actor) {
   actor.xVelocity = getCollisionVelocity(true, actor);
   actor.yVelocity = getCollisionVelocity(false, actor);
 }
