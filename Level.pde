@@ -80,10 +80,10 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
     }
     else if (actor.xVelocity > 0) {
       // Right
-      int minTileX = gridIndex(actor.x + actor.width) + 1;
-      int maxTileX = gridIndex(actor.x + actor.xVelocity);
+      int minTileX = gridIndex(actor.x + actor.width - 1) + 1;
+      int maxTileX = gridIndex(actor.x + actor.width + actor.xVelocity);
       int minTileY = gridIndex(actor.y);
-      int maxTileY = gridIndex(actor.y + actor.height);
+      int maxTileY = gridIndex(actor.y + actor.height - 1);
       
       for (int i = minTileX; i <= maxTileX; i++) {
         for (int j = minTileY; j <= maxTileY; j++) {
@@ -119,7 +119,7 @@ float getCollisionVelocity(boolean horizontal, Actor actor) {
       int minTileY = gridIndex(actor.y + actor.height - 1) + 1;
       int maxTileY = gridIndex(actor.y + actor.height + actor.yVelocity);
       int minTileX = gridIndex(tempX);
-      int maxTileX = gridIndex(tempX + actor.width);
+      int maxTileX = gridIndex(tempX + actor.width - 1);
       
       for (int j = minTileY; j <= maxTileY; j++) {
         for (int i = minTileX; i <= maxTileX; i++) {
