@@ -4,6 +4,7 @@ class Actor extends Entity {
   
   boolean facingRight;
   boolean onGround;
+  boolean jumping;
   
   float speed;
   float xVelocity;
@@ -14,8 +15,10 @@ class Actor extends Entity {
   
   Actor() {
     speed = 1;
-    onGround = false;
+    
     facingRight = false;
+    onGround = false;
+    jumping = false;
   }
   
   boolean hasGravity() {
@@ -38,12 +41,12 @@ class Actor extends Entity {
     }
     
     if (hasGravity()) {
-      if (goingUp && onGround) {
+      if (jumping && onGround) {
         onGround = false;
         jumpTimer = jumpMax;
       }
       
-      if (jumpTimer > 0 && !onGround && goingUp) {
+      if (jumpTimer > 0 && !onGround && jumping) {
         jumpTimer--;
         applyGravity(false);
       }

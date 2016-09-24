@@ -53,7 +53,9 @@ void keyPressed() {
     if (isKey(k)) {
       KeyState state = keyState.get(k);
       
-      state.pressed = true;
+      if (!state.beingHeld) {
+        state.pressed = true;
+      }
       state.beingHeld = true;
     }
   }

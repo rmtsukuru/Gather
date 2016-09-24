@@ -33,7 +33,14 @@ class Player extends Actor {
     this.goingLeft = keyState.get(LEFT).beingHeld;
     this.goingRight = keyState.get(RIGHT).beingHeld;
     this.goingDown = keyState.get(DOWN).beingHeld;
-    this.goingUp = keyState.get(' ').beingHeld;
+    this.goingUp = keyState.get(UP).beingHeld;
+    
+    if (keyState.get(' ').pressed) {
+      this.jumping = true;
+    }
+    else if (keyState.get(' ').released) {
+      this.jumping = false;
+    }
     
     super.update();
     resetKeys();
