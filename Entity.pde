@@ -9,11 +9,19 @@ class Entity {
   }
   
   Entity(float x, float y) {
+    this(x, y, 0, 255);
+  }
+  
+  Entity(float x, float y, color strokeColor, color fillColor) {
+    this(x, y, strokeColor, fillColor, 32);
+  }
+  
+  Entity(float x, float y, color strokeColor, color fillColor, int size) {
     this.x = x;
     this.y = y;
-    width = height = 16;
-    strokeColor = 0;
-    fillColor = 255;
+    width = height = size;
+    this.strokeColor = strokeColor;
+    this.fillColor = fillColor;
   }
   
   void update() {
