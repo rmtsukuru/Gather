@@ -3,6 +3,8 @@ class Bullet extends Actor {
   static final int WIDTH = 16;
   static final int HEIGHT = 8;
   
+  final color COLOR = color(200, 150, 0);
+  
   Bullet() {
     this(false);
   }
@@ -19,7 +21,7 @@ class Bullet extends Actor {
     
     this.width = WIDTH;
     this.height = HEIGHT;
-    this.fillColor = color(200, 150, 0);
+    this.fillColor = COLOR;
     this.speed = 10;
   }
   

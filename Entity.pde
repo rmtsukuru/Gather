@@ -10,7 +10,7 @@ class Entity {
   }
   
   Entity(float x, float y) {
-    this(x, y, 0, 255);
+    this(x, y, 180, 255);
   }
   
   Entity(float x, float y, color strokeColor, color fillColor) {

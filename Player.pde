@@ -7,6 +7,7 @@ class Player extends Actor {
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   
+  final color BORDER_COLOR = color(255, 230, 230);
   final color COLOR = color(0, 200, 250);
   
   Player() {
@@ -19,6 +20,7 @@ class Player extends Actor {
     this.width = SIZE;
     this.height = SIZE * 2;
     this.speed = SPEED;
+    this.strokeColor = BORDER_COLOR;
     this.fillColor = COLOR;
     this.borderRadius = RADIUS;
     this.jumpTimer = 0;
