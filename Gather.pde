@@ -11,6 +11,7 @@ void setup() {
     size(640, 480);
     frameRate(FPS);
     
+    Audio.configure(this);
     configureInput();
     
     player = new Player(180, 200);

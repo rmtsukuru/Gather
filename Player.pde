@@ -52,6 +52,8 @@ class Player extends Actor {
       else {
         bullet.x = x;
       }
+      Audio.play("shoot00.wav");
+      
       addEntity(bullet);
     }
     
