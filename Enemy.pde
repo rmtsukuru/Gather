@@ -11,15 +11,15 @@ class Enemy extends Actor {
   
   void setVelocity() {
     super.setVelocity();
-    handleTileCollision(this);
+    Level.handleTileCollision(this);
   }
   
   void update() {
     super.update();
-    handleEntityCollision(this);
+    Level.handleEntityCollision(this);
   }
   
-  void collisionResponse(Entity other) {
+  void handleEntityCollision(Entity other) {
     if (other instanceof Bullet) {
       this.delete();
     }

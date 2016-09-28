@@ -29,7 +29,7 @@ class Player extends Actor {
   
   void setVelocity() {
     super.setVelocity();
-    handleTileCollision(this);
+    Level.handleTileCollision(this);
   }
   
   void update() {
@@ -56,11 +56,11 @@ class Player extends Actor {
       }
       Audio.play("shoot00.wav");
       
-      addEntity(bullet);
+      Level.addEntity(bullet);
     }
     
     super.update();
     Input.resetKeys();
-    handleEntityCollision(this);
+    Level.handleEntityCollision(this);
   }
 }

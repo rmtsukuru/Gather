@@ -95,11 +95,11 @@ class Actor extends Entity {
     y += yVelocity;
   }
   
-  void tileCollisionResponse() {
+  void handleTileCollision() {
     // Do nothing, this is for overriding.
   }
   
-  void collisionResponse(Entity other) {
+  void handleEntityCollision(Entity other) {
     // Do nothing, this is also for overriding.
   }
 }

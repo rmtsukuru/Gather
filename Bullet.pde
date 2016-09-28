@@ -32,18 +32,18 @@ class Bullet extends Actor {
   
   void setVelocity() {
     super.setVelocity();
-    handleTileCollision(this);
+    Level.handleTileCollision(this);
   }
   
   void update() {
     super.update();
   }
   
-  void tileCollisionResponse() {
+  void handleTileCollision() {
     this.delete();
   }
   
-  void collisionResponse(Entity other) {
+  void handleEntityCollision(Entity other) {
     if (other instanceof Enemy) {
       this.delete();
     }

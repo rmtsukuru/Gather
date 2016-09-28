@@ -3,44 +3,42 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 Actor player;
-List<Entity> entities;
 
 static final int FPS = 60;
+
+static Gather instance;
 
 void setup() {
     size(640, 480);
     frameRate(FPS);
     
+    Gather.instance = this;
+    
     Audio.configure(this);
     Input.configure(this);
+    Level.configure(this);
+    
+    Level.addEntity(new Enemy(420, 200));
+    Level.addEntity(new Enemy(380, 300));
+    Level.addEntity(new Enemy(200, 50));
     
     player = new Player(180, 200);
-    entities = new ArrayList<Entity>(10);
-    configureLevel();
-    entities.add(player);
+    Level.addEntity(player);
 }
 
 void draw() {
   background(20, 20, 60);
   
-  for (int i = 0; i < tiles.length; i++) {
-    for (int j = 0; j < tiles[i].length; j++) {
-      if (tiles[i][j] == 1) {
-        stroke(155, 120, 120);
-        fill(70, 0, 150);
-        rect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-      }
-    }
-  }
+  Level.drawTiles();
   
-  ListIterator<Entity> iterator = newEntities.listIterator();
+  ListIterator<Entity> iterator = Level.newEntities.listIterator();
   while (iterator.hasNext()) {
     Entity newEntity = iterator.next();
-    entities.add(newEntity);
+    Level.entities.add(newEntity);
     iterator.remove();
   }
   
-  iterator = entities.listIterator();
+  iterator = Level.entities.listIterator();
   while (iterator.hasNext()) {
     Entity entity = iterator.next();
     entity.update();
