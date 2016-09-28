@@ -65,10 +65,7 @@ int tileBottom(int gridX, int gridY) {
 }
 
 boolean areColliding(Entity a, Entity b) {
-  if (a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height) {
-    return true;
-  }
-  return false;
+  return a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
 }
 
 float getCollisionVelocity(boolean horizontal, Actor actor) {
