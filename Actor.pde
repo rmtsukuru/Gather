@@ -14,7 +14,11 @@ class Actor extends Entity {
   int jumpMax;
   
   Actor() {
-    super();
+    this(0, 0);
+  }
+  
+  Actor(float x, float y) {
+    super(x, y);
     speed = 1;
     
     facingRight = false;
@@ -93,5 +97,9 @@ class Actor extends Entity {
   
   void tileCollisionResponse() {
     // Do nothing, this is for overriding.
+  }
+  
+  void collisionResponse(Entity other) {
+    // Do nothing, this is also for overriding.
   }
 }

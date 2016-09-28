@@ -16,6 +16,7 @@ void setup() {
     
     player = new Player(180, 200);
     entities = new ArrayList<Entity>(10);
+    configureLevel();
     entities.add(player);
 }
 

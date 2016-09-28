@@ -41,4 +41,10 @@ class Bullet extends Actor {
   void tileCollisionResponse() {
     this.delete();
   }
+  
+  void collisionResponse(Entity other) {
+    if (other instanceof Enemy) {
+      this.delete();
+    }
+  }
 }

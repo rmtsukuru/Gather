@@ -61,5 +61,6 @@ class Player extends Actor {
     
     super.update();
     Input.resetKeys();
+    handleEntityCollision(this);
   }
 }

@@ -19,12 +19,10 @@ int[][] tiles = new int[][] {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 
 List<Entity> newEntities = new LinkedList();
 
-void fillMap(ArrayList<Entity> entities) {
-  Entity entity = new Entity(300, 246);
-  entity.fillColor = color(200, 0, 255);
-  entity.width = entity.height = 80;
-  entities.add(entity);
-  entities.add(new Entity(120, 90));
+void configureLevel() {
+  addEntity(new Enemy(420, 200));
+  addEntity(new Enemy(380, 300));
+  addEntity(new Enemy(200, 50));
 }
 
 void addEntity(Entity entity) {
@@ -64,6 +62,13 @@ int tileTop(int gridX, int gridY) {
 
 int tileBottom(int gridX, int gridY) {
   return (gridY * TILE_SIZE) + TILE_SIZE;
+}
+
+boolean areColliding(Entity a, Entity b) {
+  if (a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height) {
+    return true;
+  }
+  return false;
 }
 
 float getCollisionVelocity(boolean horizontal, Actor actor) {
@@ -152,5 +157,17 @@ void handleTileCollision(Actor actor) {
   
   if (startXVelocity != actor.xVelocity || startYVelocity != actor.yVelocity) {
     actor.tileCollisionResponse();
+  }
+}
+
+void handleEntityCollision(Actor actor) {
+  for (Entity entity : entities) {
+    if (areColliding(actor, entity)) {
+      actor.collisionResponse(entity);
+      if (!(entity instanceof Enemy)) {
+        Actor other = (Actor) entity;
+        other.collisionResponse(actor);
+      }
+    }
   }
 }
