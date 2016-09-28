@@ -3,7 +3,7 @@ class Player extends Actor {
   static final int SIZE = 30;
   static final int RADIUS = 7;
   static final float SPEED = 5;
-  static final int GUN_HEIGHT = 20;
+  static final int GUN_HEIGHT = 21;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   
