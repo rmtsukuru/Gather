@@ -5,6 +5,9 @@ import java.util.ListIterator;
 Actor player;
 
 static final int FPS = 60;
+static final int ENEMY_SPAWN_RATE = 2;
+
+int counter = 0;
 
 static Gather instance;
 
@@ -18,10 +21,6 @@ void setup() {
     Input.configure(this);
     Level.configure(this);
     
-    Level.addEntity(new Enemy(420, 200));
-    Level.addEntity(new Enemy(380, 300));
-    Level.addEntity(new Enemy(200, 50));
-    
     player = new Player(180, 200);
     Level.addEntity(player);
 }
@@ -30,6 +29,18 @@ void draw() {
   background(20, 20, 60);
   
   Level.drawTiles();
+  
+  counter++;
+  if (counter % FPS * ENEMY_SPAWN_RATE == 0) {
+    counter = 0;
+    float rate = 0.5;
+    if (counter > 10 * FPS) {
+      rate += 0.1 * (counter / (10.0 * FPS));
+    }
+    if (Math.random() < rate) {
+      Level.addEntity(new Enemy((float) Math.random()*620, (float) Math.random()*460));
+    }
+  }
   
   ListIterator<Entity> iterator = Level.newEntities.listIterator();
   while (iterator.hasNext()) {
