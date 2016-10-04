@@ -6,8 +6,10 @@ Player player;
 
 static final int FPS = 60;
 static final int ENEMY_SPAWN_RATE = 2;
+static final int EXIT_TIMER_FRAMES = (int) (0.45 * FPS);
 
 int counter = 0;
+int exitTimer = EXIT_TIMER_FRAMES;
 float healthBarTop;
 
 static Gather instance;
@@ -75,4 +77,15 @@ void draw() {
   text("Health:", 5, 20);
   Graphics.drawDecayingBar(50, 8, 120, 16, (float) player.health / Player.MAX_HP, player.HP_BAR_COLOR, 
                                             healthBarTop, player.HP_DECAY_COLOR);
+  
+  if (player.health <= 0) {
+    if (exitTimer == 0) {
+      System.exit(0);
+    }
+    else {
+      exitTimer--;
+      fill(255, 0, 0);
+      rect(0, 0, 640, 480);
+    }
+  }
 }
