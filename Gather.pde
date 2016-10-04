@@ -8,6 +8,7 @@ static final int FPS = 60;
 static final int ENEMY_SPAWN_RATE = 2;
 
 int counter = 0;
+float healthBarTop;
 
 static Gather instance;
 
@@ -23,6 +24,7 @@ void setup() {
     Level.configure(this);
     
     player = new Player(180, 200);
+    healthBarTop = (float) player.health / Player.MAX_HP;
     Level.addEntity(player);
 }
 
@@ -61,7 +63,16 @@ void draw() {
     }
   }
   
+  if (healthBarTop * Player.MAX_HP > player.health) {
+    if (player.damageTimer == 0) {
+      healthBarTop -= Graphics.BAR_DECAY_RATE;
+    }
+  }
+  else {
+    healthBarTop = (float) player.health / Player.MAX_HP;
+  }
   fill(255);
   text("Health:", 5, 20);
-  Graphics.drawBar(50, 8, 120, 16, (float) player.health / Player.MAX_HP, player.HP_BAR_COLOR);
+  Graphics.drawDecayingBar(50, 8, 120, 16, (float) player.health / Player.MAX_HP, player.HP_BAR_COLOR, 
+                                            healthBarTop, player.HP_DECAY_COLOR);
 }

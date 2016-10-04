@@ -5,7 +5,8 @@ class Player extends Actor {
   static final float SPEED = 5;
   static final int GUN_HEIGHT = 21;
   
-  final color HP_BAR_COLOR = color(30, 250, 10);
+  final color HP_BAR_COLOR = color(50, 180, 120);
+  final color HP_DECAY_COLOR = color(255, 0, 0);
   static final int MAX_HP = 100;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
