@@ -1,6 +1,6 @@
 static class Graphics {
   
-  static final float BAR_DECAY_RATE = 0.2 / FPS;
+  static final float BAR_DECAY_RATE = 0.5 / FPS;
   
   static PApplet parent;
   
