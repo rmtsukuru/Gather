@@ -2,6 +2,7 @@ class Enemy extends Actor {
 
   static final int MAX_HP = 100;
   final color HP_BAR_COLOR = color(230, 20, 20);
+  final int ATTACK_DAMAGE = 5;
   
   int health;
   
@@ -13,6 +14,10 @@ class Enemy extends Actor {
     super(x, y);
     this.fillColor = color(10, 10, 10);
     this.health = MAX_HP;
+  }
+  
+  int getDamage() {
+    return ATTACK_DAMAGE;
   }
   
   void setVelocity() {

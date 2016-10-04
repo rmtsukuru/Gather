@@ -12,6 +12,7 @@ static class Graphics {
     parent.rect(x, y, width, height);
     parent.noStroke();
     parent.fill(fillColor);
-    parent.rect(x + 2, y + 2, (width - 3) * fillRatio, height - 3);
+    float boundedRatio = max(0, min(fillRatio, 1));
+    parent.rect(x + 2, y + 2, (width - 3) * boundedRatio, height - 3);
   }
 }

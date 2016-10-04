@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-Actor player;
+Player player;
 
 static final int FPS = 60;
 static final int ENEMY_SPAWN_RATE = 2;
@@ -60,4 +60,8 @@ void draw() {
       iterator.remove();
     }
   }
+  
+  fill(255);
+  text("Health:", 5, 20);
+  Graphics.drawBar(50, 8, 120, 16, (float) player.health / Player.MAX_HP, player.HP_BAR_COLOR);
 }
