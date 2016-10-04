@@ -34,19 +34,10 @@ class Enemy extends Actor {
     }
   }
   
-  void drawHealthBar() {
-    stroke(255);
-    fill(0);
-    rect(x - 8, y - 18, width + 16, 13);
-    noStroke();
-    fill(HP_BAR_COLOR);
-    rect(x - 6, y - 16, (width + 13) * (float) health / MAX_HP, 10);
-  }
-  
   void draw() {
     super.draw();
     if (health < MAX_HP) {
-      drawHealthBar();
+      Graphics.drawBar((int) x - 8, (int) y - 18, width + 16, 13, (float) health / MAX_HP, HP_BAR_COLOR);
     }
   }
 }

@@ -17,6 +17,7 @@ void setup() {
     
     Gather.instance = this;
     
+    Graphics.configure(this);
     Audio.configure(this);
     Input.configure(this);
     Level.configure(this);
