@@ -3,6 +3,7 @@ class Bullet extends Actor {
   static final int WIDTH = 16;
   static final int HEIGHT = 8;
   static final int SPEED = 18;
+  static final int DAMAGE = 20;
   
   final color COLOR = color(200, 150, 0);
   
@@ -24,6 +25,10 @@ class Bullet extends Actor {
     this.height = HEIGHT;
     this.fillColor = COLOR;
     this.speed = SPEED;
+  }
+  
+  int getDamage() {
+    return DAMAGE;
   }
   
   boolean hasGravity() {
