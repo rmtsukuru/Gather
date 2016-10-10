@@ -44,9 +44,9 @@ class Enemy extends Actor {
   }
   
   void handleEntityCollision(Entity other) {
-    if (other instanceof Bullet) {
-      Bullet bullet = (Bullet) other;
-      health -= bullet.getDamage();
+    if (other instanceof PlayerAttack) {
+      PlayerAttack attack = (PlayerAttack) other;
+      health -= attack.getDamage();
       if (health <= 0) {
         this.delete();
       }

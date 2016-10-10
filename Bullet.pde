@@ -1,4 +1,4 @@
-class Bullet extends Actor {
+class Bullet extends PlayerAttack {
   
   static final int WIDTH = 16;
   static final int HEIGHT = 8;
