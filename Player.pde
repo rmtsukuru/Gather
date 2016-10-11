@@ -47,16 +47,21 @@ class Player extends Actor {
   }
   
   void update() {
-    this.goingLeft = Input.holdKey(LEFT);
-    this.goingRight = Input.holdKey(RIGHT);
-    this.goingDown = Input.holdKey(DOWN);
-    this.goingUp = Input.holdKey(UP);
-    
-    if (Input.pressKey(' ')) {
-      this.jumping = true;
+    if (swordDrawn) {
+      this.goingLeft = this.goingRight = this.goingUp = this.goingDown = this.jumping = false;
     }
-    else if (Input.releaseKey(' ')) {
-      this.jumping = false;
+    else {
+      this.goingLeft = Input.holdKey(LEFT);
+      this.goingRight = Input.holdKey(RIGHT);
+      this.goingDown = Input.holdKey(DOWN);
+      this.goingUp = Input.holdKey(UP);
+      
+      if (Input.pressKey(' ')) {
+        this.jumping = true;
+      }
+      else if (Input.releaseKey(' ')) {
+        this.jumping = false;
+      }
     }
     
     if (Input.pressKey('z')) {
