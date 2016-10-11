@@ -1,10 +1,6 @@
 abstract class PlayerAttack extends Actor {
   
-  abstract int getDamage();
-  
-  boolean hasGravity() {
-    return false;
-  }
+  abstract int getDamage(Entity entity);
   
   void update() {
     super.update();

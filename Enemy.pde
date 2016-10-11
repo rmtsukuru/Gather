@@ -1,6 +1,6 @@
 class Enemy extends Actor {
 
-  static final int MAX_HP = 100;
+  static final int MAX_HP = 50;
   final color HP_BAR_COLOR = color(230, 20, 20);
   final int ATTACK_DAMAGE = 5;
   static final int JUMP_TIMER_FRAMES = (int) (0.2 * FPS);
@@ -46,7 +46,7 @@ class Enemy extends Actor {
   void handleEntityCollision(Entity other) {
     if (other instanceof PlayerAttack) {
       PlayerAttack attack = (PlayerAttack) other;
-      health -= attack.getDamage();
+      health -= attack.getDamage(this);
       if (health <= 0) {
         this.delete();
       }

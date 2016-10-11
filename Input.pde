@@ -19,6 +19,7 @@ static class Input {
     Input.parent = parent;
     
     keys.add('z');
+    keys.add('x');
     keys.add(' ');
     keys.add(UP);
     keys.add(DOWN);

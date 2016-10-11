@@ -27,7 +27,7 @@ class Bullet extends PlayerAttack {
     this.speed = SPEED;
   }
   
-  int getDamage() {
+  int getDamage(Entity entity) {
     return DAMAGE;
   }
   

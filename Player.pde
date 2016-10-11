@@ -4,6 +4,7 @@ class Player extends Actor {
   static final int RADIUS = 7;
   static final float SPEED = 5;
   static final int GUN_HEIGHT = 21;
+  static final int BLADE_HEIGHT = 28;
   
   final color HP_BAR_COLOR = color(50, 180, 120);
   final color HP_DECAY_COLOR = color(255, 0, 0);
@@ -17,6 +18,7 @@ class Player extends Actor {
   
   int health;
   int damageTimer;
+  boolean swordDrawn;
   
   Player() {
     this(0, 0);
@@ -33,6 +35,7 @@ class Player extends Actor {
     this.borderRadius = RADIUS;
     this.jumpTimer = 0;
     this.jumpMax = JUMP_TIMER_FRAMES;
+    this.swordDrawn = false;
     
     this.health = MAX_HP;
     this.damageTimer = 0;
@@ -68,6 +71,14 @@ class Player extends Actor {
       Audio.play("shoot00.wav");
       
       Level.addEntity(bullet);
+    }
+    
+    if (Input.pressKey('x') && !swordDrawn) {
+      Sword sword = new Sword(this);
+      swordDrawn = true;
+      Audio.play("slice00.wav");
+      
+      Level.addEntity(sword);
     }
     
     if (damageTimer > 0) {
