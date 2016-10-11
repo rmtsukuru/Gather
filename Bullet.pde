@@ -28,6 +28,11 @@ class Bullet extends PlayerAttack {
   }
   
   int getDamage(Entity entity) {
+    if (this.deleted) {
+      return 0;
+    }
+    
+    this.delete();
     return DAMAGE;
   }
   
