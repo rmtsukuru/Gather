@@ -9,6 +9,7 @@ class Player extends Actor {
   final color HP_BAR_COLOR = color(50, 180, 120);
   final color HP_DECAY_COLOR = color(255, 0, 0);
   static final int MAX_HP = 100;
+  static final int STARTING_BULLETS = 6;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   static final int DAMAGE_TIMER_FRAMES = (int) (0.8 * FPS);
@@ -17,6 +18,8 @@ class Player extends Actor {
   final color COLOR = color(0, 200, 250);
   
   int health;
+  int bullets;
+  
   int damageTimer;
   boolean swordDrawn;
   
@@ -35,10 +38,11 @@ class Player extends Actor {
     this.borderRadius = RADIUS;
     this.jumpTimer = 0;
     this.jumpMax = JUMP_TIMER_FRAMES;
-    this.swordDrawn = false;
     
     this.health = MAX_HP;
+    this.bullets = STARTING_BULLETS;
     this.damageTimer = 0;
+    this.swordDrawn = false;
   }
   
   void setVelocity() {
@@ -65,17 +69,23 @@ class Player extends Actor {
     }
     
     if (Input.pressKey('z')) {
-      Bullet bullet = new Bullet(facingRight);
-      bullet.y = y + GUN_HEIGHT;
-      if (facingRight) {
-        bullet.x = x + this.width;
+      if (bullets > 0) {
+        bullets--;
+        Bullet bullet = new Bullet(facingRight);
+        bullet.y = y + GUN_HEIGHT;
+        if (facingRight) {
+          bullet.x = x + this.width;
+        }
+        else {
+          bullet.x = x;
+        }
+        Audio.play("shoot00.wav");
+        
+        Level.addEntity(bullet);
       }
       else {
-        bullet.x = x;
+        Audio.play("click00.wav");
       }
-      Audio.play("shoot00.wav");
-      
-      Level.addEntity(bullet);
     }
     
     if (Input.pressKey('x') && !swordDrawn) {
