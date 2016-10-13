@@ -78,7 +78,7 @@ void draw() {
   Graphics.drawDecayingBar(50, 8, 120, 16, (float) player.health / Player.MAX_HP, player.HP_BAR_COLOR, 
                                             healthBarTop, player.HP_DECAY_COLOR);
   fill(255);
-  text("Ammo: " + player.bullets + "/" + Player.STARTING_BULLETS, 5, 40);
+  text("Ammo: " + player.bullets + "/" + player.reserveBullets, 5, 40);
   
   if (player.health <= 0) {
     if (exitTimer == 0) {

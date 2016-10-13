@@ -9,18 +9,22 @@ class Player extends Actor {
   final color HP_BAR_COLOR = color(50, 180, 120);
   final color HP_DECAY_COLOR = color(255, 0, 0);
   static final int MAX_HP = 100;
+  static final int MAX_LOADED_BULLETS = 6;
   static final int STARTING_BULLETS = 6;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   static final int DAMAGE_TIMER_FRAMES = (int) (0.8 * FPS);
+  static final int RELOAD_TIMER_FRAMES = (int) (0.6 * FPS);
   
   final color BORDER_COLOR = color(255, 230, 230);
   final color COLOR = color(0, 200, 250);
   
   int health;
   int bullets;
+  int reserveBullets;
   
   int damageTimer;
+  int reloadTimer;
   boolean swordDrawn;
   
   Player() {
@@ -40,7 +44,8 @@ class Player extends Actor {
     this.jumpMax = JUMP_TIMER_FRAMES;
     
     this.health = MAX_HP;
-    this.bullets = STARTING_BULLETS;
+    this.bullets = MAX_LOADED_BULLETS;
+    this.reserveBullets = STARTING_BULLETS;
     this.damageTimer = 0;
     this.swordDrawn = false;
   }
@@ -68,6 +73,10 @@ class Player extends Actor {
       }
     }
     
+    if (reloadTimer > 0) {
+      reloadTimer--;
+    }
+    
     if (Input.pressKey('z')) {
       if (bullets > 0) {
         bullets--;
@@ -82,9 +91,19 @@ class Player extends Actor {
         Audio.play("shoot00.wav");
         
         Level.addEntity(bullet);
+        if (bullets == 0) {
+          reloadTimer = RELOAD_TIMER_FRAMES;
+        }
+      }
+      else if(reloadTimer == 0 && reserveBullets > 0) {
+        int reloadCount = min(6, reserveBullets);
+        reserveBullets -= reloadCount;
+        bullets = reloadCount;
+        Audio.play("click01.wav");
       }
       else {
         Audio.play("click00.wav");
+        reloadTimer = RELOAD_TIMER_FRAMES;
       }
     }
     
