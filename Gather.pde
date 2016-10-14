@@ -28,6 +28,9 @@ void setup() {
     player = new Player(180, 200);
     healthBarTop = (float) player.health / Player.MAX_HP;
     Level.addEntity(player);
+    
+    Powerup powerup = new Ammo(340, 360);
+    Level.addEntity(powerup);
 }
 
 void draw() {
