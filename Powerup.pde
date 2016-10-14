@@ -6,7 +6,7 @@ abstract class Powerup extends Actor {
     super(0, 0);
   }
   
-  Powerup(int x, int y) {
+  Powerup(float x, float y) {
     super();
     this.x = x;
     this.y = y;
@@ -41,7 +41,7 @@ class Ammo extends Powerup {
     this(0, 0);
   }
   
-  Ammo(int x, int y) {
+  Ammo(float x, float y) {
     super(x, y);
     this.fillColor = color(160, 130, 140);
   }

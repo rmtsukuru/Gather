@@ -6,6 +6,7 @@ Player player;
 
 static final int FPS = 60;
 static final int ENEMY_SPAWN_RATE = 2;
+static final int POWERUP_SPAWN_RATE = 4;
 static final int EXIT_TIMER_FRAMES = (int) (0.45 * FPS);
 
 int counter = 0;
@@ -28,9 +29,6 @@ void setup() {
     player = new Player(180, 200);
     healthBarTop = (float) player.health / Player.MAX_HP;
     Level.addEntity(player);
-    
-    Powerup powerup = new Ammo(340, 360);
-    Level.addEntity(powerup);
 }
 
 void draw() {
@@ -39,14 +37,18 @@ void draw() {
   Level.drawTiles();
   
   counter++;
-  if (counter % FPS * ENEMY_SPAWN_RATE == 0) {
-    counter = 0;
+  if (counter % (FPS * ENEMY_SPAWN_RATE) == 0) {
     float rate = 0.5;
     if (counter > 10 * FPS) {
       rate += 0.1 * (counter / (10.0 * FPS));
     }
     if (Math.random() < rate) {
       Level.addEntity(new Enemy((float) Math.random()*620, (float) Math.random()*460));
+    }
+  }
+  if (counter % (FPS * POWERUP_SPAWN_RATE) == 0) {
+    if (Math.random() < 0.7) {
+      Level.addEntity(new Ammo((float) Math.random()*620, (float) Math.random()*460));
     }
   }
   
