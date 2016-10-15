@@ -67,6 +67,6 @@ class HealthPack extends Powerup {
   
   void grantBoon(Player player) {
     player.health += HEAL_AMOUNT;
-    Audio.play("beep00.wav");
+    Audio.play("beep01.wav");
   }
 }
