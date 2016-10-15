@@ -51,3 +51,22 @@ class Ammo extends Powerup {
     Audio.play("beep00.wav");
   }
 }
+
+class HealthPack extends Powerup {
+  
+  static final int HEAL_AMOUNT = 30;
+  
+  HealthPack() {
+    this(0, 0);
+  }
+  
+  HealthPack(float x, float y) {
+    super(x, y);
+    this.fillColor = color(120, 170, 150);
+  }
+  
+  void grantBoon(Player player) {
+    player.health += HEAL_AMOUNT;
+    Audio.play("beep00.wav");
+  }
+}

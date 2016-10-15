@@ -31,6 +31,15 @@ void setup() {
     Level.addEntity(player);
 }
 
+Powerup getRandomPowerup(float x, float y) {
+  if (Math.random() < 0.4) {
+    return new HealthPack(x, y);
+  }
+  else {
+    return new Ammo(x, y);
+  }
+}
+
 void draw() {
   background(20, 20, 60);
   
@@ -48,7 +57,7 @@ void draw() {
   }
   if (counter % (FPS * POWERUP_SPAWN_RATE) == 0) {
     if (Math.random() < 0.7) {
-      Level.addEntity(new Ammo((float) Math.random()*620, (float) Math.random()*460));
+      Level.addEntity(getRandomPowerup((float) Math.random()*620, (float) Math.random()*460));
     }
   }
   
