@@ -47,7 +47,7 @@ void draw() {
   
   counter++;
   if (counter % (FPS * ENEMY_SPAWN_RATE) == 0) {
-    float rate = 0.5;
+    float rate = 0.3;
     if (counter > 10 * FPS) {
       rate += 0.1 * (counter / (10.0 * FPS));
     }
@@ -56,7 +56,7 @@ void draw() {
     }
   }
   if (counter % (FPS * POWERUP_SPAWN_RATE) == 0) {
-    if (Math.random() < 0.7) {
+    if (Math.random() < 0.6) {
       Level.addEntity(getRandomPowerup((float) Math.random()*620, (float) Math.random()*460));
     }
   }

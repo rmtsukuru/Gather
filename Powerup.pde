@@ -54,7 +54,7 @@ class Ammo extends Powerup {
 
 class HealthPack extends Powerup {
   
-  static final int HEAL_AMOUNT = 30;
+  static final int HEAL_AMOUNT = 20;
   
   HealthPack() {
     this(0, 0);
