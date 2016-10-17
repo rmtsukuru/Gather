@@ -33,7 +33,7 @@ class Entity {
   void draw() {
     stroke(strokeColor);
     fill(fillColor);
-    rect(x, y, width, height, borderRadius);
+    Graphics.drawRect(x, y, width, height, borderRadius);
   }
   
   void delete() {

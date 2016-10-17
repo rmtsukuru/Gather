@@ -4,6 +4,8 @@ import java.util.ListIterator;
 
 Player player;
 
+static final int SCREEN_WIDTH = 640;
+static final int SCREEN_HEIGHT = 480;
 static final int FPS = 60;
 static final int ENEMY_SPAWN_RATE = 2;
 static final int POWERUP_SPAWN_RATE = 4;
@@ -15,8 +17,11 @@ float healthBarTop;
 
 static Gather instance;
 
+void settings() {
+    size(SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
 void setup() {
-    size(640, 480);
     frameRate(FPS);
     
     Gather.instance = this;
@@ -79,6 +84,8 @@ void draw() {
     }
   }
   
+  Graphics.update(player);
+  
   if (healthBarTop * Player.MAX_HP > player.health) {
     if (player.damageTimer == 0) {
       healthBarTop -= Graphics.BAR_DECAY_RATE;
@@ -101,7 +108,7 @@ void draw() {
     else {
       exitTimer--;
       fill(255, 0, 0);
-      rect(0, 0, 640, 480);
+      rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
   }
 }

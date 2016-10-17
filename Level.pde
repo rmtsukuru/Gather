@@ -16,7 +16,10 @@ static class Level {
                                       {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                       {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                       {1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0},
-                                      {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0}
+                                      {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0},
+                                      {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0},
+                                      {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0},
+                                      {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0},
                                      };
 
   static List<Entity> entities;
@@ -41,10 +44,18 @@ static class Level {
         if (tiles[i][j] == 1) {
           parent.stroke(155, 120, 120);
           parent.fill(70, 0, 150);
-          parent.rect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+          Graphics.drawRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
       }
     }
+  }
+  
+  static int mapWidth() {
+    return TILE_SIZE * tiles[0].length;
+  }
+  
+  static int mapHeight() {
+    return TILE_SIZE * tiles.length;
   }
 
   static int gridIndex(float x) {
