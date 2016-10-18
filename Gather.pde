@@ -31,7 +31,7 @@ void setup() {
     Input.configure(this);
     Level.configure(this);
     
-    player = new Player(180, 200);
+    player = new Player(30, 100);
     healthBarTop = (float) player.health / Player.MAX_HP;
     Level.addEntity(player);
 }
