@@ -7,8 +7,8 @@ Player player;
 static final int SCREEN_WIDTH = 640;
 static final int SCREEN_HEIGHT = 480;
 static final int FPS = 60;
-static final int ENEMY_SPAWN_RATE = 2;
-static final int POWERUP_SPAWN_RATE = 4;
+static final int ENEMY_SPAWN_RATE = 4;
+static final int POWERUP_SPAWN_RATE = 8;
 static final int EXIT_TIMER_FRAMES = (int) (0.45 * FPS);
 
 int counter = 0;
@@ -53,10 +53,11 @@ void draw() {
   counter++;
   if (counter % (FPS * ENEMY_SPAWN_RATE) == 0) {
     float rate = 0.3;
-    if (counter > 10 * FPS) {
-      rate += 0.1 * (counter / (10.0 * FPS));
+    if (counter > 60 * FPS) {
+      rate += 0.1 * (counter / (60.0 * FPS));
     }
     if (Math.random() < rate) {
+      // TODO fix random coordinates
       Level.addEntity(new Enemy((float) Math.random()*620, (float) Math.random()*460));
     }
   }
