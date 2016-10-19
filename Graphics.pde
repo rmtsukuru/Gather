@@ -1,8 +1,4 @@
 static class Graphics {
-  
-  static final float CAMERA_VELOCITY = 3;
-  static final float CAMERA_HORIZONTAL_THRESHOLD = 0.5;
-  static final float CAMERA_VERTICAL_THRESHOLD = 0.5;
   static final float BAR_DECAY_RATE = 0.5 / FPS;
   
   static PApplet parent;
