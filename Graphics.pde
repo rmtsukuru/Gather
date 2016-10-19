@@ -1,8 +1,8 @@
 static class Graphics {
   
   static final float CAMERA_VELOCITY = 3;
-  static final float CAMERA_HORIZONTAL_THRESHOLD = 0.4;
-  static final float CAMERA_VERTICAL_THRESHOLD = 0.4;
+  static final float CAMERA_HORIZONTAL_THRESHOLD = 0.5;
+  static final float CAMERA_VERTICAL_THRESHOLD = 0.5;
   static final float BAR_DECAY_RATE = 0.5 / FPS;
   
   static PApplet parent;
@@ -18,18 +18,8 @@ static class Graphics {
   }
   
   static void update(Player player) {
-    if ((player.x - cameraX) / Gather.SCREEN_WIDTH < CAMERA_HORIZONTAL_THRESHOLD) {
-      cameraX -= CAMERA_VELOCITY;
-    }
-    else if ((player.x - cameraX) / Gather.SCREEN_WIDTH > 1 - CAMERA_HORIZONTAL_THRESHOLD) {
-      cameraX += CAMERA_VELOCITY;
-    }
-    if ((player.y - cameraY) / Gather.SCREEN_HEIGHT < CAMERA_VERTICAL_THRESHOLD) {
-      cameraY -= CAMERA_VELOCITY;
-    }
-    else if ((player.y - cameraY) / Gather.SCREEN_HEIGHT > 1 - CAMERA_VERTICAL_THRESHOLD) {
-      cameraY += CAMERA_VELOCITY;
-    }
+    cameraX = player.x - Gather.SCREEN_WIDTH / 2;
+    cameraY = player.y - Gather.SCREEN_HEIGHT / 2;
     
     if (cameraX < 0) {
       cameraX = 0;
