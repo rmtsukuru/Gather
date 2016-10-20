@@ -57,13 +57,12 @@ void draw() {
       rate += 0.1 * (counter / (60.0 * FPS));
     }
     if (Math.random() < rate) {
-      // TODO fix random coordinates
-      Level.addEntity(new Enemy((float) Math.random()*620, (float) Math.random()*460));
+      Level.addEntity(new Enemy(player.x + ((float) Math.random()*SCREEN_WIDTH - SCREEN_WIDTH / 2), player.y + ((float) Math.random()*SCREEN_HEIGHT - SCREEN_HEIGHT / 2)));
     }
   }
   if (counter % (FPS * POWERUP_SPAWN_RATE) == 0) {
     if (Math.random() < 0.6) {
-      Level.addEntity(getRandomPowerup((float) Math.random()*620, (float) Math.random()*460));
+      Level.addEntity(getRandomPowerup(player.x + ((float) Math.random()*SCREEN_WIDTH - SCREEN_WIDTH / 2), player.y + ((float) Math.random()*SCREEN_HEIGHT - SCREEN_HEIGHT / 2)));
     }
   }
   
