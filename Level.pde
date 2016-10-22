@@ -179,7 +179,7 @@ static class Level {
         for (int j = maxTileY; j >= minTileY; j--) {
           for (int i = minTileX; i <= maxTileX; i++) {
             if (!isPassableTile(i, j)) {
-              return max(actor.y - tileBottom(i, j), actor.yVelocity);
+              return max(tileBottom(i, j) - actor.y, actor.yVelocity);
             }
           }
         }
