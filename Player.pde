@@ -1,6 +1,7 @@
 class Player extends Actor {
   
-  static final int SIZE = 30;
+  static final int WIDTH = 27;
+  static final int HEIGHT = 60;
   static final int RADIUS = 7;
   static final float SPEED = 5;
   static final int GUN_HEIGHT = 21;
@@ -34,8 +35,8 @@ class Player extends Actor {
   Player(int x, int y) {
     this.x = x;
     this.y = y;
-    this.width = SIZE;
-    this.height = SIZE * 2;
+    this.width = WIDTH;
+    this.height = HEIGHT;
     this.speed = SPEED;
     this.strokeColor = BORDER_COLOR;
     this.fillColor = COLOR;
