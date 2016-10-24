@@ -132,6 +132,7 @@ class Player extends Actor {
       damageTimer = DAMAGE_TIMER_FRAMES;
       Enemy enemy = (Enemy) other;
       health -= enemy.getDamage();
+      Audio.play("hit00.wav");
     }
   }
 }
