@@ -70,3 +70,20 @@ class HealthPack extends Powerup {
     Audio.play("beep01.wav");
   }
 }
+
+class Artifact extends Powerup {
+  
+  Artifact() {
+    this(0, 0);
+  }
+  
+  Artifact(float x, float y) {
+    super(x, y);
+    this.fillColor = color(220, 34, 157);
+  }
+  
+  void grantBoon(Player player) {
+    player.hasArtifact = true;
+    Audio.play("shriek01.wav");
+  }
+}

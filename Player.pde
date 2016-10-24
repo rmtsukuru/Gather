@@ -23,6 +23,7 @@ class Player extends Actor {
   int health;
   int bullets;
   int reserveBullets;
+  boolean hasArtifact;
   
   int damageTimer;
   int reloadTimer;
@@ -47,6 +48,7 @@ class Player extends Actor {
     this.health = MAX_HP;
     this.bullets = MAX_LOADED_BULLETS;
     this.reserveBullets = STARTING_BULLETS;
+    this.hasArtifact = false;
     this.damageTimer = 0;
     this.swordDrawn = false;
   }

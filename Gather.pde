@@ -31,6 +31,9 @@ void setup() {
     Input.configure(this);
     Level.configure(this);
     
+    Level.addEntity(new Artifact(800, 300));
+    
+    
     player = new Player(30, 100);
     healthBarTop = (float) player.health / Player.MAX_HP;
     Level.addEntity(player);
@@ -101,6 +104,10 @@ void draw() {
   fill(255);
   text("Ammo: " + player.bullets + "/" + player.reserveBullets, 5, 40);
   
+  if (player.hasArtifact) {
+    text("Artifact retrieved", 5, 60);
+  }
+  
   if (player.health <= 0) {
     if (exitTimer == 0) {
       System.exit(0);
@@ -110,5 +117,21 @@ void draw() {
       fill(255, 0, 0);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
+  }
+  else if (player.hasArtifact && (player.x == 0 || player.x + player.width == Level.mapWidth())) {
+    if (exitTimer == 0) {
+      System.exit(0);
+    }
+    else {
+      exitTimer--;
+      fill(190, 0, 255, 80);
+      rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+      fill(255, 255, 255);
+      text("Mission accomplished!", SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2);
+    }
+  }
+  else {
+    fill(120, 120, 150, 80);
+    rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
 }
