@@ -15,6 +15,7 @@ static final int WIN_TIMER_FRAMES = (int) (1.5 * FPS);
 int counter = 0;
 int deathTimer = DEATH_TIMER_FRAMES;
 int winTimer = WIN_TIMER_FRAMES;
+boolean winning;
 float healthBarTop;
 
 static Gather instance;
@@ -120,7 +121,8 @@ void draw() {
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
   } 
-  else if (player.hasArtifact && (player.x == 0 || player.x + player.width == Level.mapWidth())) {
+  else if (player.hasArtifact && (winning || player.x == 0 || player.x + player.width == Level.mapWidth())) {
+    winning = true;
     if (winTimer == 0) {
       System.exit(0);
     }
