@@ -28,6 +28,7 @@ class Player extends Actor {
   int damageTimer;
   int reloadTimer;
   boolean swordDrawn;
+  Set<Entity> hitEnemies;
   
   Player() {
     this(0, 0);
@@ -51,6 +52,7 @@ class Player extends Actor {
     this.hasArtifact = false;
     this.damageTimer = 0;
     this.swordDrawn = false;
+    this.hitEnemies = new HashSet();
   }
   
   void setVelocity() {
@@ -121,6 +123,9 @@ class Player extends Actor {
     if (damageTimer > 0) {
       damageTimer--;
     }
+    else {
+      hitEnemies.clear();
+    }
     
     super.update();
     Input.resetKeys();
@@ -128,8 +133,11 @@ class Player extends Actor {
   }
   
   void handleEntityCollision(Entity other) {
-    if (other instanceof Enemy && damageTimer == 0) {
-      damageTimer = DAMAGE_TIMER_FRAMES;
+    if (other instanceof Enemy && !hitEnemies.contains(other)) {
+      if (damageTimer == 0) {
+        damageTimer = DAMAGE_TIMER_FRAMES;
+      }
+      hitEnemies.add(other);
       Enemy enemy = (Enemy) other;
       health -= enemy.getDamage();
       Audio.play("hit00.wav");
