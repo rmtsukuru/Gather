@@ -109,6 +109,18 @@ static class Level {
   
     return isPassableTile(gridX, gridY);
   }
+  
+  static int scalarGridIndex(int x, int y) {
+    return x + (y * tiles[0].length);
+  }
+  
+  static int gridXFromScalar(int i) {
+    return i % tiles[0].length;
+  }
+  
+  static int gridYFromScalar(int i) {
+    return i / tiles[0].length;
+  }
 
   static int tileLeft(int gridX, int gridY) {
     return (gridX * TILE_SIZE);
@@ -124,6 +136,27 @@ static class Level {
 
   static int tileBottom(int gridX, int gridY) {
     return (gridY * TILE_SIZE) + TILE_SIZE;
+  }
+  
+  static Entity setRandomSpawnPosition(Entity subject, Player player) {
+    int minTileX = gridIndex(max(0, player.x - Gather.SCREEN_WIDTH / 2));
+    int maxTileX = gridIndex(min(mapWidth(), player.x + Gather.SCREEN_WIDTH / 2));
+    int minTileY = gridIndex(max(0, player.y - Gather.SCREEN_HEIGHT / 2));
+    int maxTileY = gridIndex(min(mapHeight(), player.y + Gather.SCREEN_HEIGHT / 2));
+    
+    List<Integer> passableTiles = new ArrayList();
+    for (int i = minTileX; i <= maxTileX; i++) {
+      for (int j = minTileY; j <= maxTileY; j++) {
+        if (isPassableTile(i, j)) {
+          passableTiles.add(scalarGridIndex(i, j));
+        }
+      }
+    }
+    int scalar = passableTiles.get(Math.round((float) Math.random() * passableTiles.size()));
+    subject.x = tileLeft(gridXFromScalar(scalar), gridYFromScalar(scalar));
+    subject.y = tileTop(gridXFromScalar(scalar), gridYFromScalar(scalar));
+    println("X: " + subject.x + " Y: " + subject.y);
+    return subject;
   }
 
   static boolean areColliding(Entity a, Entity b) {
