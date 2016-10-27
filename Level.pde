@@ -155,7 +155,6 @@ static class Level {
     int scalar = passableTiles.get(Math.round((float) Math.random() * passableTiles.size()));
     subject.x = tileLeft(gridXFromScalar(scalar), gridYFromScalar(scalar));
     subject.y = tileTop(gridXFromScalar(scalar), gridYFromScalar(scalar));
-    println("X: " + subject.x + " Y: " + subject.y);
     return subject;
   }
 
