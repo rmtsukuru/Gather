@@ -26,10 +26,10 @@ class Enemy extends Actor {
   void setVelocity() {
     this.goingLeft = false;
     this.goingRight = false;
-    if (player.x < x) {
+    if (player.x + player.width/2 < x) {
       this.goingLeft = true;
     }
-    else if (player.x > x + width) {
+    else if (player.x + player.width/2 > x + width) {
       this.goingRight = true;
     }
     super.setVelocity();
