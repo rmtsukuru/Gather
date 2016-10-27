@@ -6,7 +6,7 @@ class Sword extends PlayerAttack {
   static final int WIDTH = 68;
   static final int HEIGHT = 3;
   static final int DAMAGE = 10;
-  static final int TTL = (int) (0.4 * FPS);
+  static final int TTL = (int) (1.0/3 * FPS);
   
   final color COLOR = color(180, 0, 20);
   
