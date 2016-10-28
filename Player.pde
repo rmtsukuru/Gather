@@ -61,6 +61,9 @@ class Player extends Actor {
   }
   
   void update() {
+    if (health > MAX_HP) {
+      health = MAX_HP;
+    }
     if (swordDrawn) {
       this.goingLeft = this.goingRight = this.goingUp = this.goingDown = this.jumping = false;
     }
