@@ -34,8 +34,7 @@ void setup() {
   Input.configure(this);
   Level.configure(this);
   
-  Level.addEntity(new Artifact(800, 300));
-  
+  Level.addEntity(new Artifact(800, 2300));
   
   player = new Player(30, 100);
   healthBarTop = (float) player.health / Player.MAX_HP;
