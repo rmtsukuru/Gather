@@ -2,8 +2,6 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-Player player;
-
 static final int SCREEN_WIDTH = 640;
 static final int SCREEN_HEIGHT = 480;
 static final int FPS = 60;
@@ -13,6 +11,8 @@ static final int DEATH_TIMER_FRAMES = (int) (0.45 * FPS);
 static final int WIN_TIMER_FRAMES = (int) (1.5 * FPS);
 
 Screen screen;
+
+Player player;
 
 int counter = 0;
 int deathTimer = DEATH_TIMER_FRAMES;
