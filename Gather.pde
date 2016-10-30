@@ -37,7 +37,9 @@ void setup() {
   
   screen = new GameScreen();
   
-  Level.addEntity(new Artifact(968, 1337));
+  Artifact artifact = new Artifact();
+  artifact.spawn();
+  Level.addEntity(artifact);
   
   player = new Player(30, 100);
   healthBarTop = (float) player.health / Player.MAX_HP;

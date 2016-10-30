@@ -73,6 +73,8 @@ class HealthPack extends Powerup {
 
 class Artifact extends Powerup {
   
+  int[][] SPAWN_POINTS = {{968, 1337}, {200, 20}, {800, 300}};
+  
   Artifact() {
     this(0, 0);
   }
@@ -85,5 +87,11 @@ class Artifact extends Powerup {
   void grantBoon(Player player) {
     player.hasArtifact = true;
     Audio.play("shriek01.wav");
+  }
+  
+  void spawn() {
+    int i = (int) (Math.random() * SPAWN_POINTS.length);
+    this.x = SPAWN_POINTS[i][0];
+    this.y = SPAWN_POINTS[i][1];
   }
 }
