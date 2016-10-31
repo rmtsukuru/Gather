@@ -4,15 +4,6 @@ interface Screen {
 
 class GameScreen implements Screen {
   
-  Powerup getRandomPowerup(float x, float y) {
-    if (Math.random() < 0.4) {
-      return new HealthPack(x, y);
-    }
-    else {
-      return new Ammo(x, y);
-    }
-  }
-  
   void handleSpawning() {
     counter++;
     if (counter % (FPS * ENEMY_SPAWN_RATE) == 0) {
@@ -22,11 +13,6 @@ class GameScreen implements Screen {
       }
       if (Math.random() < rate) {
         Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
-      }
-    }
-    if (counter % (FPS * POWERUP_SPAWN_RATE) == 0) {
-      if (Math.random() < 0.6) {
-        Level.addEntity(Level.setRandomSpawnPosition(getRandomPowerup(0, 0), player));
       }
     }
   }

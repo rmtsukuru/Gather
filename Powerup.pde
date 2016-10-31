@@ -1,6 +1,24 @@
+void spawnPowerups() {
+  for (int i = 0; i < POWERUP_SPAWN_CAP; i++) {
+    if (Math.random() < POWERUP_SPAWN_CHANCE) {
+      Level.addEntity(Level.setRandomSpawnPosition(getRandomPowerup(0, 0)));
+    }
+  }
+}
+
+Powerup getRandomPowerup(float x, float y) {
+  if (Math.random() < Powerup.HEALTH_PACK_RATE) {
+    return new HealthPack(x, y);
+  }
+  else {
+    return new Ammo(x, y);
+  }
+}
+
 abstract class Powerup extends Actor {
   
   static final int SIZE = 16;
+  static final float HEALTH_PACK_RATE = 0.4;
   
   Powerup() {
     super(0, 0);

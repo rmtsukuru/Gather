@@ -6,7 +6,8 @@ static final int SCREEN_WIDTH = 640;
 static final int SCREEN_HEIGHT = 480;
 static final int FPS = 60;
 static final int ENEMY_SPAWN_RATE = 4;
-static final int POWERUP_SPAWN_RATE = 8;
+static final int POWERUP_SPAWN_CAP = 16;
+static final float POWERUP_SPAWN_CHANCE = 0.6;
 static final int DEATH_TIMER_FRAMES = (int) (0.45 * FPS);
 static final int WIN_TIMER_FRAMES = (int) (1.5 * FPS);
 
@@ -37,6 +38,7 @@ void setup() {
   
   screen = new GameScreen();
   
+  spawnPowerups();
   Artifact artifact = new Artifact();
   artifact.spawn();
   Level.addEntity(artifact);

@@ -138,12 +138,7 @@ static class Level {
     return (gridY * TILE_SIZE) + TILE_SIZE;
   }
   
-  static Entity setRandomSpawnPosition(Entity subject, Player player) {
-    int minTileX = gridIndex(max(0, player.x - Gather.SCREEN_WIDTH / 2));
-    int maxTileX = gridIndex(min(mapWidth(), player.x + Gather.SCREEN_WIDTH / 2));
-    int minTileY = gridIndex(max(0, player.y - Gather.SCREEN_HEIGHT / 2));
-    int maxTileY = gridIndex(min(mapHeight(), player.y + Gather.SCREEN_HEIGHT / 2));
-    
+  static Entity setRandomSpawnPosition(Entity subject, int minTileX, int maxTileX, int minTileY, int maxTileY) {
     List<Integer> passableTiles = new ArrayList();
     for (int i = minTileX; i <= maxTileX; i++) {
       for (int j = minTileY; j <= maxTileY; j++) {
@@ -156,6 +151,19 @@ static class Level {
     subject.x = tileLeft(gridXFromScalar(scalar), gridYFromScalar(scalar));
     subject.y = tileTop(gridXFromScalar(scalar), gridYFromScalar(scalar));
     return subject;
+  }
+  
+  static Entity setRandomSpawnPosition(Entity subject, Player player) {
+    int minTileX = gridIndex(max(0, player.x - Gather.SCREEN_WIDTH / 2));
+    int maxTileX = gridIndex(min(mapWidth(), player.x + Gather.SCREEN_WIDTH / 2));
+    int minTileY = gridIndex(max(0, player.y - Gather.SCREEN_HEIGHT / 2));
+    int maxTileY = gridIndex(min(mapHeight(), player.y + Gather.SCREEN_HEIGHT / 2));
+    
+    return setRandomSpawnPosition(subject, minTileX, maxTileX, minTileY, maxTileY);
+  }
+  
+  static Entity setRandomSpawnPosition(Entity subject) {
+    return setRandomSpawnPosition(subject, 0, (mapWidth() / TILE_SIZE) - 1, 0, (mapHeight() / TILE_SIZE) - 1);
   }
 
   static boolean areColliding(Entity a, Entity b) {
