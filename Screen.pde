@@ -9,7 +9,7 @@ class GameScreen implements Screen {
     if (counter % (FPS * ENEMY_SPAWN_RATE) == 0) {
       float rate = 0.3;
       if (counter > 60 * FPS) {
-        rate += 0.1 * (counter / (60.0 * FPS));
+        rate += 0.2 * (counter / (60.0 * FPS));
       }
       if (Math.random() < rate) {
         Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
