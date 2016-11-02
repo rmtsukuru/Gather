@@ -2,13 +2,43 @@ static class Level {
   
   static final int TILE_SIZE = 32;
 
+  static int[][] tiles;
+
   static List<Entity> entities;
   static List<Entity> newEntities;
   
   static PApplet parent;
+  
+  static void loadMap(String filename) {
+    List<String> lines = new LinkedList();
+    BufferedReader reader = parent.createReader("levels/" + filename);
+    try {
+      String currentLine = reader.readLine();
+      while(currentLine != null) {
+        lines.add(currentLine);
+        currentLine = reader.readLine();
+      }
+      reader.close();
+    }
+    catch (IOException e) {
+      println("Failed to load map data, terminating.");
+      e.printStackTrace();
+      System.exit(-1);
+    }
+    tiles = new int[lines.size()][];
+    for (int i = 0; i < lines.size(); i++) {
+      char[] temp = lines.get(i).toCharArray();
+      tiles[i] = new int[temp.length];
+      for (int j = 0; j < temp.length; j++) {
+        tiles[i][j] = Integer.parseInt("" + temp[j]);
+      }
+    }
+  }
 
   static void configure(PApplet parent) {
     Level.parent = parent;
+    
+    loadMap("map01");
     
     entities = new LinkedList();
     newEntities = new LinkedList();
@@ -19,9 +49,9 @@ static class Level {
   }
   
   static void drawTiles() {  
-    for (int i = 0; i < Map.tiles.length; i++) {
-      for (int j = 0; j < Map.tiles[i].length; j++) {
-        if (Map.tiles[i][j] == 1) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        if (tiles[i][j] == 1) {
           parent.stroke(155, 120, 120);
           parent.fill(70, 0, 150);
           Graphics.drawRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
@@ -31,11 +61,11 @@ static class Level {
   }
   
   static int mapWidth() {
-    return TILE_SIZE * Map.tiles[0].length;
+    return TILE_SIZE * tiles[0].length;
   }
   
   static int mapHeight() {
-    return TILE_SIZE * Map.tiles.length;
+    return TILE_SIZE * tiles.length;
   }
 
   static int gridIndex(float x) {
@@ -43,11 +73,11 @@ static class Level {
   }
 
   static boolean isPassableTile(int gridX, int gridY) {
-    if (gridX < 0 || gridX >= Map.tiles[0].length || gridY < 0 || gridY >= Map.tiles.length) {
+    if (gridX < 0 || gridX >= tiles[0].length || gridY < 0 || gridY >= tiles.length) {
       return false;
     }
   
-    return Map.tiles[gridY][gridX] == 0;
+    return tiles[gridY][gridX] == 0;
   }
 
   static boolean isPassable(float x, float y) {
@@ -58,15 +88,15 @@ static class Level {
   }
   
   static int scalarGridIndex(int x, int y) {
-    return x + (y * Map.tiles[0].length);
+    return x + (y * tiles[0].length);
   }
   
   static int gridXFromScalar(int i) {
-    return i % Map.tiles[0].length;
+    return i % tiles[0].length;
   }
   
   static int gridYFromScalar(int i) {
-    return i / Map.tiles[0].length;
+    return i / tiles[0].length;
   }
 
   static int tileLeft(int gridX, int gridY) {
