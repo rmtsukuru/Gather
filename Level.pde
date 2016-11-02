@@ -48,10 +48,14 @@ static class Level {
     newEntities.add(entity);
   }
   
-  static void drawTiles() {  
-    for (int i = 0; i < tiles.length; i++) {
-      for (int j = 0; j < tiles[i].length; j++) {
-        if (tiles[i][j] == 1) {
+  static void drawTiles() {
+    int minX = gridIndex(Graphics.cameraX);
+    int maxX = gridIndex(Graphics.cameraX + SCREEN_WIDTH);
+    int minY = gridIndex(Graphics.cameraY);
+    int maxY = gridIndex(Graphics.cameraY + SCREEN_HEIGHT);
+    for (int i = minY; i <= maxY; i++) {
+      for (int j = minX; j <= maxX; j++) {
+        if (i < tiles.length && j < tiles[i].length && tiles[i][j] == 1) {
           parent.stroke(155, 120, 120);
           parent.fill(70, 0, 150);
           Graphics.drawRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
