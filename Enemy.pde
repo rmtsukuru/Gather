@@ -1,11 +1,12 @@
 class Enemy extends Actor {
 
-  static final int MAX_HP = 70;
+  final int MAX_HP_BASE = 40;
+  final int MAX_HP_INCREMENT = 10;
   final color HP_BAR_COLOR = color(230, 20, 20);
   final int ATTACK_DAMAGE = 10;
   static final int JUMP_TIMER_FRAMES = (int) (0.2 * FPS);
   
-  int health;
+  int health, maxHealth;
   
   public Enemy() {
     this(0, 0);
@@ -16,7 +17,22 @@ class Enemy extends Actor {
     this.jumpMax = JUMP_TIMER_FRAMES;
     
     this.fillColor = color(10, 10, 10);
-    this.health = MAX_HP;
+    setMaxHealth();
+    health = maxHealth;
+  }
+  
+  void setMaxHealth() {
+    float x = (float) Math.random();
+    maxHealth = MAX_HP_BASE;
+    if (x >= 0.1) {
+      maxHealth += MAX_HP_INCREMENT;
+    }
+    if (x >= 0.5) {
+      maxHealth += MAX_HP_INCREMENT;
+    }
+    if (x >= 0.9) {
+      maxHealth += MAX_HP_INCREMENT;
+    }
   }
   
   int getDamage() {
@@ -55,8 +71,8 @@ class Enemy extends Actor {
   
   void draw() {
     super.draw();
-    if (health < MAX_HP) {
-      Graphics.drawBar((int) x - 8, (int) y - 18, width + 16, 13, (float) health / MAX_HP, HP_BAR_COLOR);
+    if (health < maxHealth) {
+      Graphics.drawBar((int) x - 8, (int) y - 18, width + 16, 13, (float) health / maxHealth, HP_BAR_COLOR);
     }
   }
 }
