@@ -3,7 +3,7 @@ class Bullet extends PlayerAttack {
   static final int WIDTH = 16;
   static final int HEIGHT = 8;
   static final int SPEED = 18;
-  static final int DAMAGE = 20;
+  static final int DAMAGE = 30;
   
   final color COLOR = color(200, 150, 0);
   

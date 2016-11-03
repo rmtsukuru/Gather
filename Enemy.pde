@@ -1,8 +1,8 @@
 class Enemy extends Actor {
 
-  static final int MAX_HP = 50;
+  static final int MAX_HP = 70;
   final color HP_BAR_COLOR = color(230, 20, 20);
-  final int ATTACK_DAMAGE = 5;
+  final int ATTACK_DAMAGE = 10;
   static final int JUMP_TIMER_FRAMES = (int) (0.2 * FPS);
   
   int health;
