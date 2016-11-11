@@ -91,7 +91,7 @@ class HealthPack extends Powerup {
 
 class Artifact extends Powerup {
   
-  int[][] SPAWN_POINTS = {{520, 750}, {4280, 1225}};
+  int[][] SPAWN_POINTS = {{2440, 1216}, {1899, 1216}, {520, 750}, {4280, 1225}};
   
   Artifact() {
     this(0, 0);
