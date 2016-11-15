@@ -5,6 +5,8 @@ class Enemy extends Actor {
   final color HP_BAR_COLOR = color(230, 20, 20);
   final int ATTACK_DAMAGE = 10;
   static final int JUMP_TIMER_FRAMES = (int) (0.2 * FPS);
+  static final float SPEED = 1;
+  static final float ARTIFACT_SPEED_MODIFIER = 3;
   
   int health, maxHealth;
   
@@ -39,6 +41,15 @@ class Enemy extends Actor {
     return ATTACK_DAMAGE;
   }
   
+  void setSpeed() {
+    if (player.hasArtifact) {
+      speed = SPEED * ARTIFACT_SPEED_MODIFIER;
+    }
+    else {
+      speed = SPEED;
+    }
+  }
+  
   void setVelocity() {
     this.goingLeft = false;
     this.goingRight = false;
@@ -48,6 +59,7 @@ class Enemy extends Actor {
     else if (player.x + player.width/2 > x + width) {
       this.goingRight = true;
     }
+    setSpeed();
     super.setVelocity();
     float tempX = this.xVelocity;
     Level.handleTileCollision(this);
