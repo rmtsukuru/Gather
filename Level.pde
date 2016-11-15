@@ -128,7 +128,8 @@ static class Level {
         }
       }
     }
-    int scalar = passableTiles.get(Math.round((float) Math.random() * passableTiles.size()));
+    int randomTile = Math.round((float) Math.random() * passableTiles.size());
+    int scalar = passableTiles.get(min(randomTile, passableTiles.size()-1);
     subject.x = tileLeft(gridXFromScalar(scalar), gridYFromScalar(scalar));
     subject.y = tileTop(gridXFromScalar(scalar), gridYFromScalar(scalar));
     return subject;
