@@ -7,9 +7,9 @@ class GameScreen implements Screen {
   void handleSpawning() {
     counter++;
     if (counter % (FPS * ENEMY_SPAWN_RATE) == 0) {
-      float rate = 0.3;
+      float rate = BASE_ENEMY_SPAWN_CHANCE;
       if (counter > 60 * FPS) {
-        rate += 0.2 * (counter / (60.0 * FPS));
+        rate += ENEMY_SPAWN_CHANCE_MINUTE_STEP * (counter / (60.0 * FPS));
       }
       if (player.hasArtifact) {
         rate = 1;
