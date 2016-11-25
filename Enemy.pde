@@ -6,7 +6,7 @@ class Enemy extends Actor {
   final int ATTACK_DAMAGE = 10;
   static final int JUMP_TIMER_FRAMES = (int) (0.2 * FPS);
   static final float SPEED = 1;
-  static final float ARTIFACT_SPEED_MODIFIER = 3;
+  static final float ARTIFACT_SPEED_MODIFIER = 2;
   
   int health, maxHealth;
   
