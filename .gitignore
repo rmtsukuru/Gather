@@ -1,3 +1,4 @@
 # Ignore temporary files.
 *.tmp
 tmp/
+release/
