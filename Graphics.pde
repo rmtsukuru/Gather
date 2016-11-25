@@ -49,13 +49,20 @@ static class Graphics {
     drawRect(x + 2, y + 2, (width - 3) * boundedRatio, height - 3);
   }
   
-  static void drawDecayingBar(int x, int y, int width, int height, float fillRatio, color fillColor, float decayRatio, color decayColor) {
+  static void drawDecayingBar(int x, int y, int width, int height, float fillRatio, color fillColor, float decayRatio, color decayColor, 
+                                                                   float armorRatio, color armorColor, float shieldRatio, color shieldColor) {
     parent.stroke(255);
     parent.fill(0);
     parent.rect(x, y, width, height);
     parent.noStroke();
+    float boundedRatio = max(0, min(shieldRatio, 1));
+    parent.fill(shieldColor);
+    parent.rect(x + 2, y + 2, (width - 3) * boundedRatio, height - 3);
+    boundedRatio = max(0, min(armorRatio, 1));
+    parent.fill(armorColor);
+    parent.rect(x + 2, y + 2, (width - 3) * boundedRatio, height - 3);
+    boundedRatio = max(0, min(decayRatio, 1));
     parent.fill(decayColor);
-    float boundedRatio = max(0, min(decayRatio, 1));
     parent.rect(x + 2, y + 2, (width - 3) * boundedRatio, height - 3);
     boundedRatio = max(0, min(fillRatio, 1));
     parent.fill(fillColor);

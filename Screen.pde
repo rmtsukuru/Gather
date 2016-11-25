@@ -31,8 +31,10 @@ class GameScreen implements Screen {
     }
     fill(255);
     text("Health:", 5, 20);
-    Graphics.drawDecayingBar(50, 8, 120, 16, (float) player.health / Player.MAX_HP, player.HP_BAR_COLOR, 
-      healthBarTop, player.HP_DECAY_COLOR);
+    Graphics.drawDecayingBar(50, 8, (int) (120 * (player.effectiveMaxHP() / 100.0)), 16, 
+      (float) player.health / player.effectiveMaxHP(), player.HP_BAR_COLOR, healthBarTop * Player.MAX_HP / player.effectiveMaxHP(), player.HP_DECAY_COLOR, 
+      (float) (player.armor + player.health) / player.effectiveMaxHP(), player.HP_ARMOR_COLOR, 
+      (float) (player.shield + player.armor + player.health) / player.effectiveMaxHP(), player.HP_SHIELD_COLOR);
     fill(255);
     text("Ammo: " + player.bullets + "/" + player.reserveBullets, 5, 40);
     if (player.hasArtifact) {

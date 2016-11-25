@@ -9,13 +9,19 @@ class Player extends Actor {
   
   final color HP_BAR_COLOR = color(50, 180, 120);
   final color HP_DECAY_COLOR = color(255, 0, 0);
+  final color HP_ARMOR_COLOR = color(240, 240, 0);
+  final color HP_SHIELD_COLOR = color(60, 80, 210);
   static final int MAX_HP = 100;
+  static final int MAX_ARMOR = 70;
+  static final int MAX_SHIELD = 30;
   static final int MAX_LOADED_BULLETS = 6;
   static final int STARTING_BULLETS = 6;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   static final int DAMAGE_TIMER_FRAMES = (int) (0.8 * FPS);
   static final int RELOAD_TIMER_FRAMES = (int) (0.6 * FPS);
+  static final int SHIELD_TIMER_FRAMES = (int) (2 * FPS);
+  static final int SHIELD_RECHARGE_RATE = 30;
   
   final color BORDER_COLOR = color(255, 230, 230);
   final color COLOR = color(0, 200, 250);
@@ -23,10 +29,14 @@ class Player extends Actor {
   int health;
   int bullets;
   int reserveBullets;
+  int armor;
+  int shield;
+  boolean hasShield;
   boolean hasArtifact;
   
   int damageTimer;
   int reloadTimer;
+  int shieldTimer;
   boolean swordDrawn;
   Set<Entity> hitEnemies;
   
@@ -63,6 +73,21 @@ class Player extends Actor {
   void update() {
     if (health > MAX_HP) {
       health = MAX_HP;
+    }
+    if (armor > MAX_ARMOR) {
+      armor = MAX_ARMOR;
+    }
+    if (hasShield && shield < MAX_SHIELD) {
+      if (shieldTimer == 0) {
+        shield++;
+        shieldTimer = FPS / SHIELD_RECHARGE_RATE;
+      }
+      else if (shieldTimer > 0) {
+        shieldTimer--;
+      }
+    }
+    if (shield > MAX_SHIELD) {
+      shield = MAX_SHIELD;
     }
     if (swordDrawn) {
       this.goingLeft = this.goingRight = this.goingUp = this.goingDown = this.jumping = false;
@@ -135,6 +160,47 @@ class Player extends Actor {
     Level.handleEntityCollision(this);
   }
   
+  int maxShield() {
+    return hasShield ? 30 : 0;
+  }
+  
+  int effectiveMaxHP() {
+    return MAX_HP + armor + maxShield();
+  }
+  
+  void heal(int amount) {
+    health += amount;
+    if (health > MAX_HP) {
+      health = MAX_HP;
+    }
+  }
+  
+  void damage(int damage) {
+    shieldTimer = SHIELD_TIMER_FRAMES;
+    int remainingDamage = damage;
+    if (shield > 0) {
+      shield -= remainingDamage;
+      if (shield < 0) {
+        remainingDamage = abs(shield);
+        shield = 0;
+      }
+      else {
+        return;
+      }
+    }
+    if (armor > 0) {
+      armor -= remainingDamage;
+      if (armor < 0) {
+        remainingDamage = abs(armor);
+        armor = 0;
+      }
+      else {
+        return;
+      }
+    }
+    health -= remainingDamage;
+  }
+  
   void handleEntityCollision(Entity other) {
     if (other instanceof Enemy && !hitEnemies.contains(other)) {
       if (damageTimer == 0) {
@@ -142,7 +208,7 @@ class Player extends Actor {
       }
       hitEnemies.add(other);
       Enemy enemy = (Enemy) other;
-      health -= enemy.getDamage();
+      damage(enemy.getDamage());
       Audio.play("hit00.wav");
     }
   }
