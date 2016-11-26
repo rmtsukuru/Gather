@@ -7,17 +7,21 @@ void spawnPowerups() {
 }
 
 Powerup getRandomPowerup(float x, float y) {
-  if (Math.random() < Powerup.SHIELD_RATE) {
+  double random = Math.random();
+  if (random < Powerup.SHIELD_RATE) {
     return new Shield(x, y);
   }
-  else if (Math.random() < Powerup.SHIELD_RATE + Powerup.ARMOR_RATE) {
+  else if (random < Powerup.SHIELD_RATE + Powerup.ARMOR_RATE) {
     return new Armor(x, y);
   }
-  else if (Math.random() < Powerup.SHIELD_RATE + Powerup.ARMOR_RATE + Powerup.HEALTH_PACK_RATE) {
+  else if (random < Powerup.SHIELD_RATE + Powerup.ARMOR_RATE + Powerup.HEALTH_PACK_RATE) {
     return new HealthPack(x, y);
   }
-  else {
+  else if (random < Powerup.SHIELD_RATE + Powerup.ARMOR_RATE + Powerup.HEALTH_PACK_RATE + Powerup.AMMO_RATE) {
     return new Ammo(x, y);
+  }
+  else {
+    return new Bandage(x, y);
   }
 }
 
@@ -26,7 +30,8 @@ abstract class Powerup extends Actor {
   static final int SIZE = 16;
   static final float SHIELD_RATE = 0.1;
   static final float ARMOR_RATE = 0.2;
-  static final float HEALTH_PACK_RATE = 0.2;
+  static final float HEALTH_PACK_RATE = 0.1;
+  static final float AMMO_RATE = 0.3;
   
   Powerup() {
     super(0, 0);
@@ -78,9 +83,30 @@ class Ammo extends Powerup {
   }
 }
 
+class Bandage extends Powerup {
+  
+  static final int SIZE = 13;
+  static final int HEAL_AMOUNT = 5;
+  
+  Bandage() {
+    this(0, 0);
+  }
+  
+  Bandage(float x, float y) {
+    super(x, y);
+    this.fillColor = color(120, 170, 150);
+    this.width = this.height = SIZE;
+  }
+  
+  void grantBoon(Player player) {
+    player.heal(HEAL_AMOUNT);
+    Audio.play("beep01.wav");
+  }
+}
+
 class HealthPack extends Powerup {
   
-  static final int HEAL_AMOUNT = 20;
+  static final int HEAL_AMOUNT = 50;
   
   HealthPack() {
     this(0, 0);
