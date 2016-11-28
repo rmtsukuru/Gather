@@ -28,9 +28,9 @@ Powerup getRandomPowerup(float x, float y) {
 abstract class Powerup extends Actor {
   
   static final int SIZE = 16;
-  static final float SHIELD_RATE = 0.1;
-  static final float ARMOR_RATE = 0.2;
-  static final float HEALTH_PACK_RATE = 0.1;
+  static final float SHIELD_RATE = 0.15;
+  static final float ARMOR_RATE = 0.15;
+  static final float HEALTH_PACK_RATE = 0.15;
   static final float AMMO_RATE = 0.3;
   
   Powerup() {
