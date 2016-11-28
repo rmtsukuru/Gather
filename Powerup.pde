@@ -140,6 +140,8 @@ class Armor extends Powerup {
     if (player.armor > Player.MAX_ARMOR) {
       player.armor = Player.MAX_ARMOR;
     }
+    Audio.play("beep01.wav");
+    // TODO add custom sound for this
   }
 }
 
@@ -161,6 +163,8 @@ class Shield extends Powerup {
     if (player.shield > Player.MAX_SHIELD) {
       player.shield = Player.MAX_SHIELD;
     }
+    Audio.play("beep01.wav");
+    // TODO add custom sound for this
   }
 }
 
