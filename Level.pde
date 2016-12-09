@@ -7,7 +7,7 @@ static class Level {
   static List<Entity> entities;
   static List<Entity> newEntities;
   
-  static PApplet parent;
+  static Gather parent;
   
   static void loadMap(String filename) {
     List<String> lines = new LinkedList();
@@ -35,7 +35,7 @@ static class Level {
     }
   }
 
-  static void configure(PApplet parent) {
+  static void configure(Gather parent) {
     Level.parent = parent;
     
     loadMap("map01");
@@ -119,11 +119,27 @@ static class Level {
     return (gridY * TILE_SIZE) + TILE_SIZE;
   }
   
+  static boolean tileOverlaps(Actor actor, int tileX, int tileY) {
+    int minTileX = gridIndex(actor.x + actor.xVelocity);
+    int maxTileX = gridIndex(actor.x + 1) - 1;
+    int minTileY = gridIndex(actor.y);
+    int maxTileY = gridIndex(actor.y + actor.height - 1);
+    
+    return (minTileX <= tileX && tileX <= maxTileX) && (minTileY <= tileY && tileY <= maxTileY);
+  }
+  
+  static boolean tileOverlapsPlayer(int tileX, int tileY) {
+    if (parent.player == null) {
+      return false;
+    }
+    return tileOverlaps(parent.player, tileX, tileY);
+  }
+  
   static Entity setRandomSpawnPosition(Entity subject, int minTileX, int maxTileX, int minTileY, int maxTileY) {
     List<Integer> passableTiles = new ArrayList();
     for (int i = minTileX; i <= maxTileX; i++) {
       for (int j = minTileY; j <= maxTileY; j++) {
-        if (isPassableTile(i, j)) {
+        if (isPassableTile(i, j) && !tileOverlapsPlayer(i, j)) {
           passableTiles.add(scalarGridIndex(i, j));
         }
       }
