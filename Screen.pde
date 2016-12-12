@@ -96,7 +96,7 @@ class WinScreen implements Screen {
       fill(190, 0, 255, 80);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       fill(255, 255, 255);
-      textSize(22);
+      textSize(26);
       text("Mission accomplished!", SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2);
     }
   }
@@ -119,7 +119,7 @@ class DeathScreen implements Screen {
       fill(180, 20, 40, 80);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       fill(255, 255, 255);
-      textSize(24);
+      textSize(26);
       text("You have died.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 - 12);
       text("Press Z to try again.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 12);
     }
