@@ -10,7 +10,6 @@ static final float BASE_ENEMY_SPAWN_CHANCE = 0.1;
 static final float ENEMY_SPAWN_CHANCE_MINUTE_STEP = 0.1;
 static final int POWERUP_SPAWN_CAP = 16;
 static final float POWERUP_SPAWN_CHANCE = 0.6;
-static final int DEATH_TIMER_FRAMES = (int) (0.45 * FPS);
 static final int WIN_TIMER_FRAMES = (int) (1.5 * FPS);
 
 Screen screen;
@@ -18,7 +17,6 @@ Screen screen;
 Player player;
 
 int counter = 0;
-int deathTimer = DEATH_TIMER_FRAMES;
 int winTimer = WIN_TIMER_FRAMES;
 float healthBarTop;
 
