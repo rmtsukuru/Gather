@@ -21,6 +21,7 @@ class GameScreen implements Screen {
   }
   
   void drawHud() {
+    textSize(12);
     if (healthBarTop * Player.MAX_HP > player.health) {
       if (player.damageTimer == 0) {
         healthBarTop -= Graphics.BAR_DECAY_RATE;
@@ -95,7 +96,8 @@ class WinScreen implements Screen {
       fill(190, 0, 255, 80);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       fill(255, 255, 255);
-      text("Mission accomplished!", SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2);
+      textSize(18);
+      text("Mission accomplished!", SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2);
     }
   }
 }
@@ -103,13 +105,23 @@ class WinScreen implements Screen {
 class DeathScreen implements Screen {
   
   public void draw() {
-    if (deathTimer == 0) {
-      System.exit(0);
+    if (Input.pressKey('z')) {
+      Gather.instance.reset();
     }
     else {
-      deathTimer--;
-      fill(255, 0, 0);
+      background(20, 20, 60);
+      Level.drawTiles();
+      
+      for (Entity entity : Level.entities) {
+        entity.draw();
+      }
+      
+      fill(180, 20, 40, 80);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+      fill(255, 255, 255);
+      textSize(20);
+      text("You have died.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 - 12);
+      text("Press Z to try again.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 12);
     }
   }
 }

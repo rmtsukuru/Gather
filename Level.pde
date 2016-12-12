@@ -130,7 +130,7 @@ static class Level {
   
   static boolean tileOverlapsPlayer(int tileX, int tileY) {
     if (parent.player == null) {
-      return false;
+      return false;   
     }
     return tileOverlaps(parent.player, tileX, tileY);
   }

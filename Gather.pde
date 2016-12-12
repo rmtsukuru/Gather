@@ -33,6 +33,10 @@ void setup() {
   
   Gather.instance = this;
   
+  reset();
+}
+
+void reset() {
   Graphics.configure(this);
   Audio.configure(this);
   Input.configure(this);
@@ -51,6 +55,9 @@ void setup() {
 }
 
 void draw() {
+  if (Input.pressKey('q')) {
+    screen = new WinScreen();
+  }
   if (screen instanceof GameScreen && player.health <= 0) {
     screen = new DeathScreen();
   } 
