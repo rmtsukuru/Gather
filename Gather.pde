@@ -53,6 +53,7 @@ void reset() {
 }
 
 void draw() {
+  textFont(Graphics.getFont());
   if (Input.pressKey('q')) {
     screen = new WinScreen();
   }

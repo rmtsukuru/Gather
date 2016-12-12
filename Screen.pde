@@ -21,7 +21,7 @@ class GameScreen implements Screen {
   }
   
   void drawHud() {
-    textSize(12);
+    textSize(16);
     if (healthBarTop * Player.MAX_HP > player.health) {
       if (player.damageTimer == 0) {
         healthBarTop -= Graphics.BAR_DECAY_RATE;
@@ -32,7 +32,7 @@ class GameScreen implements Screen {
     }
     fill(255);
     text("Health:", 5, 20);
-    Graphics.drawDecayingBar(50, 8, (int) (120 * (player.effectiveMaxHP() / 100.0)), 16, 
+    Graphics.drawDecayingBar(60, 8, (int) (120 * (player.effectiveMaxHP() / 100.0)), 16, 
       (float) player.health / player.effectiveMaxHP(), player.HP_BAR_COLOR, healthBarTop * Player.MAX_HP / player.effectiveMaxHP(), player.HP_DECAY_COLOR, 
       (float) (player.armor + player.health) / player.effectiveMaxHP(), player.HP_ARMOR_COLOR, 
       (float) (player.shield + player.armor + player.health) / player.effectiveMaxHP(), player.HP_SHIELD_COLOR);
@@ -96,7 +96,7 @@ class WinScreen implements Screen {
       fill(190, 0, 255, 80);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       fill(255, 255, 255);
-      textSize(18);
+      textSize(22);
       text("Mission accomplished!", SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2);
     }
   }
@@ -119,7 +119,7 @@ class DeathScreen implements Screen {
       fill(180, 20, 40, 80);
       rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
       fill(255, 255, 255);
-      textSize(20);
+      textSize(24);
       text("You have died.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 - 12);
       text("Press Z to try again.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 12);
     }

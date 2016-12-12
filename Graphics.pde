@@ -1,16 +1,25 @@
 static class Graphics {
   static final float BAR_DECAY_RATE = 0.5 / FPS;
   
-  static PApplet parent;
+  static Gather parent;
   
   static float cameraX;
   static float cameraY;
+  static PFont font;
   
-  static void configure(PApplet parent) {
+  static void configure(Gather parent) {
     Graphics.parent = parent;
     
     cameraX = 0;
     cameraY = 0;
+    
+    if (font == null) {
+      font = parent.createFont("fonts/pixelated.ttf", 12);
+    }
+  }
+  
+  static PFont getFont() {
+    return font;
   }
   
   static void update(Player player) {
