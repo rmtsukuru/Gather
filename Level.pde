@@ -1,6 +1,7 @@
 static class Level {
   
   static final int TILE_SIZE = 32;
+  static final int PLAYER_NO_SPAWN_RADIUS = 80;
 
   static int[][] tiles;
 
@@ -120,8 +121,8 @@ static class Level {
   }
   
   static boolean tileOverlaps(Actor actor, int tileX, int tileY) {
-    int minTileX = gridIndex(actor.x + actor.xVelocity);
-    int maxTileX = gridIndex(actor.x + 1) - 1;
+    int minTileX = gridIndex(actor.x);
+    int maxTileX = gridIndex(actor.x + actor.width + 1) - 1;
     int minTileY = gridIndex(actor.y);
     int maxTileY = gridIndex(actor.y + actor.height - 1);
     
@@ -135,11 +136,25 @@ static class Level {
     return tileOverlaps(parent.player, tileX, tileY);
   }
   
+  static boolean tileNearPlayer(int tileX, int tileY) {
+    if (parent.player == null) {
+      return false;
+    }
+    Player player = parent.player;
+    
+    int minTileX = gridIndex(player.x - PLAYER_NO_SPAWN_RADIUS);
+    int maxTileX = gridIndex(player.x + player.width + 1 + PLAYER_NO_SPAWN_RADIUS) - 1;
+    int minTileY = gridIndex(player.y - PLAYER_NO_SPAWN_RADIUS);
+    int maxTileY = gridIndex(player.y + player.height - 1 + PLAYER_NO_SPAWN_RADIUS);
+    
+    return (minTileX <= tileX && tileX <= maxTileX) && (minTileY <= tileY && tileY <= maxTileY);
+  }
+  
   static Entity setRandomSpawnPosition(Entity subject, int minTileX, int maxTileX, int minTileY, int maxTileY) {
     List<Integer> passableTiles = new ArrayList();
     for (int i = minTileX; i <= maxTileX; i++) {
       for (int j = minTileY; j <= maxTileY; j++) {
-        if (isPassableTile(i, j) && !tileOverlapsPlayer(i, j)) {
+        if (isPassableTile(i, j) && !tileNearPlayer(i, j)) {
           passableTiles.add(scalarGridIndex(i, j));
         }
       }
