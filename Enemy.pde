@@ -8,7 +8,7 @@ class Enemy extends Actor {
   static final float SPEED = 1;
   static final float ARTIFACT_SPEED_MODIFIER = 2;
   static final int THOUGHT_TIMER_FRAMES = (int) (1 * FPS);
-  static final int LEASH_RADIUS = 200;
+  static final int LEASH_RADIUS = 250;
   static final float FOLLOW_CHANCE = 0.8;
   
   int health, maxHealth;
