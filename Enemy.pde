@@ -77,10 +77,15 @@ class Enemy extends Actor {
   
   void think() {
     isMoving = false;
-    if (this.x - LEASH_RADIUS < player.x + player.width && this.x + this.width + LEASH_RADIUS > player.x &&
-        this.y - LEASH_RADIUS < player.y + player.height && this.y + this.height + LEASH_RADIUS > player.y) {
-      if (Math.random() < FOLLOW_CHANCE) {
-        isMoving = true;
+    if (player.hasArtifact) {
+      isMoving = true;
+    }
+    else {
+      if (this.x - LEASH_RADIUS < player.x + player.width && this.x + this.width + LEASH_RADIUS > player.x &&
+          this.y - LEASH_RADIUS < player.y + player.height && this.y + this.height + LEASH_RADIUS > player.y) {
+        if (Math.random() < FOLLOW_CHANCE) {
+          isMoving = true;
+        }
       }
     }
   }
