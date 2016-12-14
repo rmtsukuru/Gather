@@ -7,8 +7,14 @@ class Enemy extends Actor {
   static final int JUMP_TIMER_FRAMES = (int) (0.2 * FPS);
   static final float SPEED = 1;
   static final float ARTIFACT_SPEED_MODIFIER = 2;
+  static final int THOUGHT_TIMER_FRAMES = (int) (1 * FPS);
+  static final int LEASH_RADIUS = 200;
+  static final float FOLLOW_CHANCE = 0.8;
   
   int health, maxHealth;
+  
+  int thoughtTimer;
+  boolean isMoving;
   
   public Enemy() {
     this(0, 0);
@@ -21,6 +27,7 @@ class Enemy extends Actor {
     this.fillColor = color(10, 10, 10);
     setMaxHealth();
     health = maxHealth;
+    isMoving = false;
   }
   
   void setMaxHealth() {
@@ -53,11 +60,13 @@ class Enemy extends Actor {
   void setVelocity() {
     this.goingLeft = false;
     this.goingRight = false;
-    if (player.x + player.width/2 < x) {
-      this.goingLeft = true;
-    }
-    else if (player.x + player.width/2 > x + width) {
-      this.goingRight = true;
+    if (isMoving) {
+      if (player.x + player.width/2 < x) {
+        this.goingLeft = true;
+      }
+      else if (player.x + player.width/2 > x + width) {
+        this.goingRight = true;
+      }
     }
     setSpeed();
     super.setVelocity();
@@ -66,7 +75,24 @@ class Enemy extends Actor {
     this.jumping = abs(tempX) > abs(this.xVelocity);
   }
   
+  void think() {
+    isMoving = false;
+    if (this.x - LEASH_RADIUS < player.x + player.width && this.x + this.width + LEASH_RADIUS > player.x &&
+        this.y - LEASH_RADIUS < player.y + player.height && this.y + this.height + LEASH_RADIUS > player.y) {
+      if (Math.random() < FOLLOW_CHANCE) {
+        isMoving = true;
+      }
+    }
+  }
+  
   void update() {
+    if (thoughtTimer <= 0) {
+      think();
+      thoughtTimer = THOUGHT_TIMER_FRAMES;
+    }
+    else {
+      thoughtTimer--;
+    }
     super.update();
     Level.handleEntityCollision(this);
   }
