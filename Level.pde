@@ -1,7 +1,7 @@
 static class Level {
   
   static final int TILE_SIZE = 32;
-  static final int PLAYER_NO_SPAWN_RADIUS = 80;
+  static final int PLAYER_NO_SPAWN_RADIUS = 160;
 
   static int[][] tiles;
 
