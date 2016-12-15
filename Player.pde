@@ -214,8 +214,6 @@ class Player extends Actor {
       }
     }
     health -= remainingDamage;
-    invincibilityTimer = INVINCIBILITY_FRAMES;
-    flashing = true;
   }
   
   void handleEntityCollision(Entity other) {
@@ -227,6 +225,8 @@ class Player extends Actor {
       Enemy enemy = (Enemy) other;
       damage(enemy.getDamage());
       Audio.play("hit00.wav");
+      invincibilityTimer = INVINCIBILITY_FRAMES;
+      flashing = true;
     }
   }
 }
