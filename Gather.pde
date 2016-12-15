@@ -2,6 +2,8 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+static final boolean DEBUG = true;
+
 static final int SCREEN_WIDTH = 640;
 static final int SCREEN_HEIGHT = 480;
 static final int FPS = 60;
@@ -54,7 +56,7 @@ void reset() {
 
 void draw() {
   textFont(Graphics.getFont());
-  if (Input.pressKey('q')) {
+  if (DEBUG && Input.pressKey('q')) {
     Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
   }
   if (screen instanceof GameScreen && player.health <= 0) {
