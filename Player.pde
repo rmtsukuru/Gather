@@ -18,6 +18,7 @@ class Player extends Actor {
   static final int STARTING_BULLETS = 6;
   
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
+  static final int INVINCIBILITY_FRAMES = (int) (1.5 * FPS);
   static final int DAMAGE_TIMER_FRAMES = (int) (0.8 * FPS);
   static final int RELOAD_TIMER_FRAMES = (int) (0.6 * FPS);
   static final int SHIELD_TIMER_FRAMES = (int) (2 * FPS);
@@ -35,6 +36,7 @@ class Player extends Actor {
   boolean hasArtifact;
   
   int damageTimer;
+  int invincibilityTimer;
   int reloadTimer;
   int shieldTimer;
   boolean swordDrawn;
@@ -61,6 +63,7 @@ class Player extends Actor {
     this.reserveBullets = STARTING_BULLETS;
     this.hasArtifact = false;
     this.damageTimer = 0;
+    this.invincibilityTimer = 0;
     this.swordDrawn = false;
     this.hitEnemies = new HashSet();
   }
@@ -89,6 +92,13 @@ class Player extends Actor {
     if (shield > MAX_SHIELD) {
       shield = MAX_SHIELD;
     }
+    if (invincibilityTimer <= 0) {
+      flashing = false;
+    }
+    else {
+      invincibilityTimer--;
+    }
+    
     if (swordDrawn) {
       this.goingLeft = this.goingRight = this.goingUp = this.goingDown = this.jumping = false;
     }
@@ -175,6 +185,10 @@ class Player extends Actor {
     }
   }
   
+  boolean invincible() {
+    return invincibilityTimer > 0;
+  }
+  
   void damage(int damage) {
     shieldTimer = SHIELD_TIMER_FRAMES;
     int remainingDamage = damage;
@@ -199,10 +213,12 @@ class Player extends Actor {
       }
     }
     health -= remainingDamage;
+    invincibilityTimer = INVINCIBILITY_FRAMES;
+    flashing = true;
   }
   
   void handleEntityCollision(Entity other) {
-    if (other instanceof Enemy && !hitEnemies.contains(other)) {
+    if (other instanceof Enemy && !hitEnemies.contains(other) && !invincible()) {
       if (damageTimer == 0) {
         damageTimer = DAMAGE_TIMER_FRAMES;
       }

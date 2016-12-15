@@ -90,6 +90,7 @@ class Actor extends Entity {
   }
   
   void update() {
+    super.update();
     setVelocity();
     x += xVelocity;
     y += yVelocity;
