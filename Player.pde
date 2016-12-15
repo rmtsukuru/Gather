@@ -94,6 +94,7 @@ class Player extends Actor {
     }
     if (invincibilityTimer <= 0) {
       flashing = false;
+      hidden = false;
     }
     else {
       invincibilityTimer--;

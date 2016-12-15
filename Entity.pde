@@ -45,9 +45,6 @@ class Entity {
         flashTimer--;
       }
     }
-    else {
-      hidden = false;
-    }
   }
   
   void draw() {
