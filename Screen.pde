@@ -16,6 +16,14 @@ class GameScreen implements Screen {
       }
       if (Math.random() < rate) {
         Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
+        if (player.hasArtifact) {
+          for (int i = 0; i < Math.round(Math.random() * 4); i++) {
+            Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
+            if (Math.random() > 0.75) {
+              break;
+            }
+          }
+        }
       }
     }
   }
