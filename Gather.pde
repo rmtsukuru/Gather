@@ -55,7 +55,7 @@ void reset() {
 void draw() {
   textFont(Graphics.getFont());
   if (Input.pressKey('q')) {
-    screen = new WinScreen();
+    Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
   }
   if (screen instanceof GameScreen && player.health <= 0) {
     screen = new DeathScreen();
