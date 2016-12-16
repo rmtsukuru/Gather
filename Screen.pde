@@ -123,7 +123,7 @@ class PauseScreen extends GameScreen {
     fill(180, 120, 150, 90);
     rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
-    fill(200);
+    fill(240);
     textSize(32);
     text("PAUSED", 280, 224);
     textSize(20);
