@@ -170,7 +170,7 @@ class Shield extends Powerup {
 
 class Artifact extends Powerup {
   
-  int[][] SPAWN_POINTS = {{1888, 2400}, {2440, 1216}, {1899, 1216}, {520, 750}, {4280, 1225}, {3920, 2304}};
+  int[][] SPAWN_POINTS = {{1904, 2400}, {2440, 1216}, {1899, 1216}, {520, 750}, {4280, 1225}, {3920, 2304}};
   int ENEMY_SUMMON_COUNT = 10;
   
   Artifact() {
