@@ -21,6 +21,7 @@ static class Input {
     keys.add('z');
     keys.add('x');
     keys.add('q');
+    keys.add('w');
     keys.add(' ');
     keys.add(UP);
     keys.add(DOWN);

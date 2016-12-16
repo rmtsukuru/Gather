@@ -67,6 +67,10 @@ class GameScreen implements Screen {
   }
   
   public void draw() {
+    if (Input.pressKey('q')) {
+      Gather.instance.screen = new PauseScreen();
+    }
+    
     background(20, 20, 60);
 
     Level.drawTiles();
@@ -100,6 +104,34 @@ class GameScreen implements Screen {
   }
 }
 
+class PauseScreen extends GameScreen {
+  public void draw() {
+    if (Input.pressKey('q') || Input.pressKey('x')) {
+      Gather.instance.screen = new GameScreen();
+    }
+    
+    background(20, 20, 60);
+
+    Level.drawTiles();
+      
+    for (Entity entity : Level.entities) {
+      entity.draw();
+    }
+    
+    drawHud();
+    
+    fill(180, 120, 150, 90);
+    rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    fill(200);
+    textSize(32);
+    text("PAUSED", 280, 224);
+    textSize(20);
+    text("PRESS Q OR X TO RESUME", 230, 260);
+    Input.resetKeys();
+  }
+}
+
 class WinScreen implements Screen {
   
   public void draw() {
@@ -122,6 +154,7 @@ class WinScreen implements Screen {
       textSize(26);
       text("Mission accomplished!", SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2);
     }
+    Input.resetKeys();
   }
 }
 
@@ -146,5 +179,6 @@ class DeathScreen implements Screen {
       text("You have died.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 - 12);
       text("Press Z to try again.", SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 12);
     }
+    Input.resetKeys();
   }
 }

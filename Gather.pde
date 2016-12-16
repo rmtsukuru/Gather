@@ -59,7 +59,7 @@ void reset() {
 
 void draw() {
   textFont(Graphics.getFont());
-  if (DEBUG && Input.pressKey('q')) {
+  if (DEBUG && Input.pressKey('w')) {
     Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
   }
   if (player.x > TUTORIAL_CUTOFF) {
