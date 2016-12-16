@@ -68,6 +68,7 @@ void draw() {
   
   if (screen instanceof GameScreen && player.health <= 0) {
     screen = new DeathScreen();
+    player.hidden = true;
   } 
   else if (screen instanceof GameScreen && player.hasArtifact && (player.x == 0 || player.x + player.width == Level.mapWidth())) {
     screen = new WinScreen();
