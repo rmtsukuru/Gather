@@ -29,7 +29,7 @@ class GameScreen implements Screen {
   }
   
   void drawHud() {
-    textSize(16);
+    textSize(18);
     if (healthBarTop * Player.MAX_HP > player.health) {
       if (player.damageTimer == 0) {
         healthBarTop -= Graphics.BAR_DECAY_RATE;
@@ -40,20 +40,30 @@ class GameScreen implements Screen {
     }
     fill(255);
     text("HEALTH:", 5, 22);
-    Graphics.drawDecayingBar(60, 8, (int) (120 * (player.effectiveMaxHP() / 100.0)), 16, 
+    Graphics.drawDecayingBar(70, 8, (int) (120 * (player.effectiveMaxHP() / 100.0)), 16, 
       (float) player.health / player.effectiveMaxHP(), player.HP_BAR_COLOR, healthBarTop * Player.MAX_HP / player.effectiveMaxHP(), player.HP_DECAY_COLOR, 
       (float) (player.armor + player.health) / player.effectiveMaxHP(), player.HP_ARMOR_COLOR, 
       (float) (player.shield + player.armor + player.health) / player.effectiveMaxHP(), player.HP_SHIELD_COLOR);
     fill(255);
-    text("AMMO:     " + player.bullets + "/" + player.reserveBullets, 5, 42);
+    text("Z         REVOLVER   [AMMO:     " + player.bullets + "/" + player.reserveBullets + "]", 5, 44);
+    text("X         SABER", 5, 64);
+    
     String objectiveText;
     if (player.hasArtifact) {
       objectiveText = "RETURN TO SURFACE AND RETREAT";
     }
     else {
-      objectiveText = "FIND AND COLLECT THE ARTIFACT";
+      objectiveText = "FIND AND COLLECT THE";
+      fill(255, 0, 0);
+      text("ARTIFACT", 270, 84);
     }
-    text("OBJECTIVE:   " + objectiveText, 330, 22);
+    fill(255);
+    text("OBJECTIVE:   " + objectiveText, 5, 84);
+    
+    if (!hideTutorial) {
+      text("USE ARROW KEYS TO MOVE LEFT AND RIGHT", 260, 140);
+      text("PRESS SPACEBAR TO JUMP", 260, 170);
+    }
   }
   
   public void draw() {

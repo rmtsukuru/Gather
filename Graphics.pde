@@ -14,7 +14,7 @@ static class Graphics {
     cameraY = 0;
     
     if (font == null) {
-      font = parent.createFont("fonts/pixelated.ttf", 12);
+      font = parent.createFont("fonts/pixelated.ttf", 16);
     }
   }
   
