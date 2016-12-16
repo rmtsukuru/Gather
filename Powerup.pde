@@ -32,6 +32,10 @@ abstract class Powerup extends Actor {
   static final float ARMOR_RATE = 0.15;
   static final float HEALTH_PACK_RATE = 0.15;
   static final float AMMO_RATE = 0.3;
+  static final int TEXT_TIMER_FRAMES = (int) (1.5 * FPS);
+  
+  boolean grabbed;
+  int textTimer;
   
   Powerup() {
     super(0, 0);
@@ -43,25 +47,55 @@ abstract class Powerup extends Actor {
     this.y = y;
     this.width = SIZE;
     this.height = SIZE;
+    this.grabbed = false;
   }
   
   void update() {
     super.update();
-    Level.handleTileCollision(this);
+    if (grabbed) {
+      if (textTimer <= 0) {
+        this.delete();
+      }
+      else {
+        textTimer--;
+      }
+    }
+    else {
+      Level.handleTileCollision(this);
+    }
   }
   
   boolean hasGravity() {
-    return true;
+    return !grabbed;
+  }
+  
+  color getTextColor() {
+    return color(255, 255, 255);
+  }
+  
+  void draw() {
+    if (grabbed) {
+      float timerRatio = 1.0 * textTimer / TEXT_TIMER_FRAMES;
+      textSize(22);
+      fill(getTextColor(), 255 * timerRatio);
+      Graphics.drawText(getBoonText(), x - getBoonText().length(), y - 60 + 60 * timerRatio);
+    }
+    else {
+      super.draw();
+    }
   }
   
   void handleEntityCollision(Entity other) {
-    if (other instanceof Player) {
+    if (!grabbed && other instanceof Player) {
       grantBoon((Player) other);
-      this.delete();
+      grabbed = true;
+      textTimer = TEXT_TIMER_FRAMES;
     }
   }
   
   abstract void grantBoon(Player player);
+  
+  abstract String getBoonText();
 }
 
 class Ammo extends Powerup {
@@ -80,6 +114,10 @@ class Ammo extends Powerup {
   void grantBoon(Player player) {
     player.reserveBullets += BULLET_AMOUNT;
     Audio.play("beep00.wav");
+  }
+  
+  String getBoonText() {
+    return "AMMO +" + BULLET_AMOUNT;
   }
 }
 
@@ -102,6 +140,14 @@ class Bandage extends Powerup {
     player.heal(HEAL_AMOUNT);
     Audio.play("beep01.wav");
   }
+  
+  color getTextColor() {
+    return color(0, 255, 0);
+  }
+  
+  String getBoonText() {
+    return "HP +" + HEAL_AMOUNT;
+  }
 }
 
 class HealthPack extends Powerup {
@@ -120,6 +166,14 @@ class HealthPack extends Powerup {
   void grantBoon(Player player) {
     player.heal(HEAL_AMOUNT);
     Audio.play("beep01.wav");
+  }
+  
+  color getTextColor() {
+    return color(0, 255, 0);
+  }
+  
+  String getBoonText() {
+    return "HP +" + HEAL_AMOUNT;
   }
 }
 
@@ -143,6 +197,14 @@ class Armor extends Powerup {
     Audio.play("beep01.wav");
     // TODO add custom sound for this
   }
+  
+  color getTextColor() {
+    return color(255, 255, 0);
+  }
+  
+  String getBoonText() {
+    return "ARMOR";
+  }
 }
 
 class Shield extends Powerup {
@@ -165,6 +227,14 @@ class Shield extends Powerup {
     }
     Audio.play("beep01.wav");
     // TODO add custom sound for this
+  }
+  
+  color getTextColor() {
+    return color(0, 0, 255);
+  }
+  
+  String getBoonText() {
+    return "SHIELD";
   }
 }
 
@@ -194,5 +264,13 @@ class Artifact extends Powerup {
     int i = (int) (Math.random() * SPAWN_POINTS.length);
     this.x = SPAWN_POINTS[i][0];
     this.y = SPAWN_POINTS[i][1];
+  }
+  
+  color getTextColor() {
+    return color(255, 0, 0);
+  }
+  
+  String getBoonText() {
+    return "ARTIFACT";
   }
 }

@@ -40,6 +40,10 @@ static class Graphics {
     }
   }
   
+  static void drawText(String text, float x, float y) {
+    parent.text(text, x - cameraX, y - cameraY);
+  }
+  
   static void drawRect(float x, float y, float width, float height) {
     drawRect(x, y, width, height, 0);
   }
