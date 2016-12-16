@@ -12,12 +12,12 @@ class GameScreen implements Screen {
         rate += ENEMY_SPAWN_CHANCE_MINUTE_STEP * (counter / (60.0 * FPS));
       }
       if (player.hasArtifact) {
-        rate = 1;
+        rate += 2;
       }
       if (Math.random() < rate) {
         Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
-        if (player.hasArtifact) {
-          for (int i = 0; i < Math.round(Math.random() * 4); i++) {
+        if (rate > 1) {
+          for (int i = 0; i < Math.round(Math.random() * (2 * rate)); i++) {
             Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
             if (Math.random() > 0.75) {
               break;
