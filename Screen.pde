@@ -39,16 +39,21 @@ class GameScreen implements Screen {
       healthBarTop = (float) player.health / Player.MAX_HP;
     }
     fill(255);
-    text("Health:", 5, 20);
+    text("HEALTH:", 5, 22);
     Graphics.drawDecayingBar(60, 8, (int) (120 * (player.effectiveMaxHP() / 100.0)), 16, 
       (float) player.health / player.effectiveMaxHP(), player.HP_BAR_COLOR, healthBarTop * Player.MAX_HP / player.effectiveMaxHP(), player.HP_DECAY_COLOR, 
       (float) (player.armor + player.health) / player.effectiveMaxHP(), player.HP_ARMOR_COLOR, 
       (float) (player.shield + player.armor + player.health) / player.effectiveMaxHP(), player.HP_SHIELD_COLOR);
     fill(255);
-    text("Ammo: " + player.bullets + "/" + player.reserveBullets, 5, 40);
+    text("AMMO:     " + player.bullets + "/" + player.reserveBullets, 5, 42);
+    String objectiveText;
     if (player.hasArtifact) {
-      text("Artifact retrieved", 5, 60);
+      objectiveText = "RETURN TO SURFACE AND RETREAT";
     }
+    else {
+      objectiveText = "FIND AND COLLECT THE ARTIFACT";
+    }
+    text("OBJECTIVE:   " + objectiveText, 330, 22);
   }
   
   public void draw() {
