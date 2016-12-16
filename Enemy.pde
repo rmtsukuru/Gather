@@ -10,7 +10,7 @@ class Enemy extends Actor {
   static final int THOUGHT_TIMER_FRAMES = (int) (1 * FPS);
   static final int LEASH_RADIUS = 250;
   static final float FOLLOW_CHANCE = 0.8;
-  static final float CRIT_CHANCE = 0.05;
+  static final float CRIT_CHANCE = 0.33;
   static final float CRIT_MULTIPLIER = 2;
   
   int health, maxHealth;
