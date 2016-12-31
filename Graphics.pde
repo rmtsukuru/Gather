@@ -61,19 +61,26 @@ static class Graphics {
   
   static void drawImage(String filename, float x, float y, boolean flip) {
     PImage image = fetchImage(filename);
-    parent.pushMatrix();
-    int flipMultiplier = flip ? -1 : 1;
-    float offset = flip ? -2 * (x - cameraX) : 0;
-    println(offset);
-    parent.scale(flipMultiplier, 1);
-    parent.translate(x - cameraX, y - cameraY);
-    parent.image(image, 0 + offset, 0, flipMultiplier * image.width, image.height);
-    parent.popMatrix();
+    drawImage(image, x, y, image.width, image.height, flip);
   }
   
   static void drawImage(String filename, float x, float y, float width, float height) {
+    drawImage(filename, x, y, width, height, false);
+  }
+  
+  static void drawImage(String filename, float x, float y, float width, float height, boolean flip) {
     PImage image = fetchImage(filename);
-    parent.image(image, x - cameraX, y - cameraY, width, height);
+    drawImage(image, x, y, width, height, flip);
+  }
+  
+  static void drawImage(PImage image, float x, float y, float width, float height, boolean flip) {
+    parent.pushMatrix();
+    int flipMultiplier = flip ? -1 : 1;
+    float offset = flip ? -2 * (x - cameraX) : 0;
+    parent.scale(flipMultiplier, 1);
+    parent.translate(x - cameraX, y - cameraY);
+    parent.image(image, 0 + offset, 0, flipMultiplier * width, height);
+    parent.popMatrix();
   }
   
   static void drawText(String text, float x, float y) {
