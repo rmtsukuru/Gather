@@ -7,8 +7,12 @@ static class Graphics {
   static float cameraY;
   static PFont font;
   
+  static Map<String, PImage> imageCache;
+  
   static void configure(Gather parent) {
     Graphics.parent = parent;
+    
+    imageCache = new HashMap();
     
     cameraX = 0;
     cameraY = 0;
@@ -38,6 +42,38 @@ static class Graphics {
     else if (cameraY + Gather.SCREEN_HEIGHT > Level.mapHeight()) {
       cameraY = Level.mapHeight() - Gather.SCREEN_HEIGHT;
     }
+  }
+  
+  static PImage fetchImage(String filename) {
+    if (imageCache.containsKey(filename)) {
+      return imageCache.get(filename);
+    }
+    
+    String fullFilename = "graphics/" + filename;
+    PImage image = parent.loadImage(fullFilename);
+    imageCache.put(filename, image);
+    return image;
+  }
+  
+  static void drawImage(String filename, float x, float y) {
+    drawImage(filename, x, y, false);
+  }
+  
+  static void drawImage(String filename, float x, float y, boolean flip) {
+    PImage image = fetchImage(filename);
+    parent.pushMatrix();
+    int flipMultiplier = flip ? -1 : 1;
+    float offset = flip ? -2 * (x - cameraX) : 0;
+    println(offset);
+    parent.scale(flipMultiplier, 1);
+    parent.translate(x - cameraX, y - cameraY);
+    parent.image(image, 0 + offset, 0, flipMultiplier * image.width, image.height);
+    parent.popMatrix();
+  }
+  
+  static void drawImage(String filename, float x, float y, float width, float height) {
+    PImage image = fetchImage(filename);
+    parent.image(image, x - cameraX, y - cameraY, width, height);
   }
   
   static void drawText(String text, float x, float y) {

@@ -47,11 +47,18 @@ class Entity {
     }
   }
   
+  // This draws the graphics directly without deciding whether or not it should.
+  void renderGraphics() {
+    stroke(strokeColor);
+    fill(fillColor);
+    Graphics.drawRect(x, y, width, height, borderRadius);
+  }
+  
+  // This draws the sprite/graphic, but first checks to see if it's hidden (e.g. because it's dead or flashing).
   void draw() {
     if (!hidden) {
-      stroke(strokeColor);
-      fill(fillColor);
-      Graphics.drawRect(x, y, width, height, borderRadius);
+      noTint();
+      renderGraphics();
     }
   }
   

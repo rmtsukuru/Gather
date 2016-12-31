@@ -229,4 +229,8 @@ class Player extends Actor {
       flashing = true;
     }
   }
+  
+  void renderGraphics() {
+    Graphics.drawImage("hero0.png", x, y, !facingRight);
+  }
 }
