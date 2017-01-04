@@ -17,6 +17,7 @@ class Player extends Actor {
   static final int MAX_LOADED_BULLETS = 6;
   static final int STARTING_BULLETS = 6;
   
+  static final int ANIMATION_TIMER_FRAMES = (int) (0.2 * FPS);
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   static final int INVINCIBILITY_FRAMES = (int) (1.5 * FPS);
   static final int DAMAGE_TIMER_FRAMES = (int) (0.8 * FPS);
@@ -35,6 +36,8 @@ class Player extends Actor {
   boolean hasShield;
   boolean hasArtifact;
   
+  int animationTimer;
+  int animationFrame;
   int damageTimer;
   int invincibilityTimer;
   int reloadTimer;
@@ -57,6 +60,9 @@ class Player extends Actor {
     this.borderRadius = RADIUS;
     this.jumpTimer = 0;
     this.jumpMax = JUMP_TIMER_FRAMES;
+    
+    this.animationTimer = ANIMATION_TIMER_FRAMES;
+    this.animationFrame = 0;
     
     this.health = MAX_HP;
     this.bullets = MAX_LOADED_BULLETS;
@@ -231,6 +237,37 @@ class Player extends Actor {
   }
   
   void renderGraphics() {
-    Graphics.drawImage("hero0.png", x, y, !facingRight);
+    if (abs(xVelocity) > 0) {
+      if (animationTimer <= 0) {
+        animationFrame++;
+        animationFrame %= 4;
+        animationTimer = ANIMATION_TIMER_FRAMES;
+      }
+      else {
+        animationTimer--;
+      }
+    }
+    else {
+      animationFrame = -1;
+      animationTimer = ANIMATION_TIMER_FRAMES;
+    }
+    
+    String frame;
+    switch(animationFrame) {
+    case 0:
+      frame = "hero_step1.png";
+      break;
+    default:
+    case 1:
+      frame = "hero0.png";
+      break;
+    case 2:
+      frame = "hero_step2.png";
+      break;
+    case 3:
+      frame = "hero0.png";
+      break;
+    }
+    Graphics.drawImage(frame, x, y, !facingRight);
   }
 }
