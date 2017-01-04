@@ -268,6 +268,6 @@ class Player extends Actor {
       frame = "hero0.png";
       break;
     }
-    Graphics.drawImage(frame, x, y, !facingRight);
+    Graphics.drawImage(frame, x, y-4, !facingRight);
   }
 }
