@@ -1,6 +1,6 @@
 class Player extends Actor {
   
-  static final int WIDTH = 27;
+  static final int WIDTH = 26;
   static final int HEIGHT = 60;
   static final int RADIUS = 7;
   static final float SPEED = 5;
@@ -17,7 +17,7 @@ class Player extends Actor {
   static final int MAX_LOADED_BULLETS = 6;
   static final int STARTING_BULLETS = 6;
   
-  static final int ANIMATION_TIMER_FRAMES = (int) (0.2 * FPS);
+  static final int ANIMATION_TIMER_FRAMES = (int) (0.15 * FPS);
   static final int JUMP_TIMER_FRAMES = (int) (0.18 * FPS);
   static final int INVINCIBILITY_FRAMES = (int) (1.5 * FPS);
   static final int DAMAGE_TIMER_FRAMES = (int) (0.8 * FPS);
@@ -237,7 +237,11 @@ class Player extends Actor {
   }
   
   void renderGraphics() {
-    if (abs(xVelocity) > 0) {
+    if (abs(yVelocity) > 0 || jumping) {
+      animationFrame = 0;
+      animationTimer = ANIMATION_TIMER_FRAMES;
+    }
+    else if (abs(xVelocity) > 0) {
       if (animationTimer <= 0) {
         animationFrame++;
         animationFrame %= 4;
