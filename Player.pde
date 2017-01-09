@@ -43,6 +43,7 @@ class Player extends Actor {
   int reloadTimer;
   int shieldTimer;
   boolean swordDrawn;
+  boolean gunDrawn;
   Set<Entity> hitEnemies;
   
   Player() {
@@ -71,6 +72,7 @@ class Player extends Actor {
     this.damageTimer = 0;
     this.invincibilityTimer = 0;
     this.swordDrawn = false;
+    this.gunDrawn = false;
     this.hitEnemies = new HashSet();
   }
   
@@ -128,6 +130,7 @@ class Player extends Actor {
     }
     
     if (Input.pressKey('z')) {
+      gunDrawn = true;
       if (bullets > 0) {
         bullets--;
         Bullet bullet = new Bullet(facingRight);
@@ -241,11 +244,12 @@ class Player extends Actor {
       animationFrame = 0;
       animationTimer = ANIMATION_TIMER_FRAMES;
     }
-    else if (abs(xVelocity) > 0) {
+    else if (abs(xVelocity) > 0 || gunDrawn) {
       if (animationTimer <= 0) {
         animationFrame++;
         animationFrame %= 4;
         animationTimer = ANIMATION_TIMER_FRAMES;
+        gunDrawn = false;
       }
       else {
         animationTimer--;
@@ -257,20 +261,28 @@ class Player extends Actor {
     }
     
     String frame;
-    switch(animationFrame) {
-    case 0:
-      frame = "hero_step1.png";
-      break;
-    default:
-    case 1:
-      frame = "hero0.png";
-      break;
-    case 2:
-      frame = "hero_step2.png";
-      break;
-    case 3:
-      frame = "hero0.png";
-      break;
+    if (swordDrawn) {
+      frame = "hero_attack1.png";
+    }
+    else if (gunDrawn) {
+      frame = "hero_attack2.png";
+    }
+    else {
+      switch(animationFrame) {
+      case 0:
+        frame = "hero_step1.png";
+        break;
+      default:
+      case 1:
+        frame = "hero0.png";
+        break;
+      case 2:
+        frame = "hero_step2.png";
+        break;
+      case 3:
+        frame = "hero0.png";
+        break;
+      }
     }
     Graphics.drawImage(frame, x, y-4, !facingRight);
   }
