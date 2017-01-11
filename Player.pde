@@ -5,7 +5,7 @@ class Player extends Actor {
   static final int RADIUS = 7;
   static final float SPEED = 5;
   static final int GUN_HEIGHT = 21;
-  static final int BLADE_HEIGHT = 28;
+  static final int BLADE_HEIGHT = 21;
   
   final color HP_BAR_COLOR = color(50, 180, 120);
   final color HP_DECAY_COLOR = color(255, 0, 0);

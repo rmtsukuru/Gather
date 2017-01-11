@@ -3,8 +3,8 @@ import java.util.HashSet;
 
 class Sword extends PlayerAttack {
   
-  static final int WIDTH = 68;
-  static final int HEIGHT = 3;
+  static final int WIDTH = 51;
+  static final int HEIGHT = 10;
   static final int DAMAGE = 20;
   static final int TTL = (int) (1.0/3 * FPS);
   
@@ -27,14 +27,6 @@ class Sword extends PlayerAttack {
   
   void update() {
     super.setVelocity();
-    this.x = player.x;
-    if (player.facingRight) {
-      this.x += player.width;
-    }
-    else {
-      this.x -= this.width;
-    }
-    this.y = player.y + Player.BLADE_HEIGHT;
     
     this.timer--;
     if (timer <= 0) {
@@ -47,6 +39,15 @@ class Sword extends PlayerAttack {
     else if (timer > TTL * 2 / 3) {
       width += round((WIDTH / (TTL / 3)));
     }
+    
+    this.x = player.x;
+    if (player.facingRight) {
+      this.x += player.width;
+    }
+    else {
+      this.x -= this.width;
+    }
+    this.y = player.y + Player.BLADE_HEIGHT;
   }
   
   int getDamage(Entity entity) {
