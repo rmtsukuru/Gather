@@ -284,6 +284,9 @@ class Player extends Actor {
         break;
       }
     }
+    if (gunDrawn) {
+      Graphics.drawImage("gun0.png", x + (facingRight ? width : -16), y + GUN_HEIGHT, !facingRight);
+    }
     Graphics.drawImage(frame, x, y-4, !facingRight);
   }
 }
