@@ -34,6 +34,10 @@ class Entity {
     this.flashTimer = 0;
   }
   
+  int zIndex() {
+    return 0;
+  }
+  
   void update() {
     // Do literally nothing (except update flash timer).
     if (flashing) {

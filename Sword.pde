@@ -25,6 +25,19 @@ class Sword extends PlayerAttack {
     this.fillColor = COLOR;
   }
   
+  int zIndex() {
+    return 5;
+  }
+  
+  int getDamage(Entity entity) {
+    if (damagedTargets.contains(entity)) {
+      return 0;
+    }
+    
+    damagedTargets.add(entity);
+    return DAMAGE;
+  }
+  
   void update() {
     super.setVelocity();
     
@@ -48,14 +61,5 @@ class Sword extends PlayerAttack {
       this.x -= this.width;
     }
     this.y = player.y + Player.BLADE_HEIGHT;
-  }
-  
-  int getDamage(Entity entity) {
-    if (damagedTargets.contains(entity)) {
-      return 0;
-    }
-    
-    damagedTargets.add(entity);
-    return DAMAGE;
   }
 }

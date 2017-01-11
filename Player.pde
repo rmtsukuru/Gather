@@ -76,6 +76,10 @@ class Player extends Actor {
     this.hitEnemies = new HashSet();
   }
   
+  int zIndex() {
+    return 10;
+  }
+  
   void setVelocity() {
     super.setVelocity();
     Level.handleTileCollision(this);

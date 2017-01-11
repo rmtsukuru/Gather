@@ -27,6 +27,14 @@ class Bullet extends PlayerAttack {
     this.speed = SPEED;
   }
   
+  int zIndex() {
+    return 10;
+  }
+  
+  boolean hasGravity() {
+    return false;
+  }
+  
   int getDamage(Entity entity) {
     if (this.deleted) {
       return 0;
@@ -34,10 +42,6 @@ class Bullet extends PlayerAttack {
     
     this.delete();
     return DAMAGE;
-  }
-  
-  boolean hasGravity() {
-    return false;
   }
   
   void setVelocity() {

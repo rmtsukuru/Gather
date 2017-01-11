@@ -80,7 +80,7 @@ class GameScreen implements Screen {
     ListIterator<Entity> iterator = Level.newEntities.listIterator();
     while (iterator.hasNext()) {
       Entity newEntity = iterator.next();
-      Level.entities.add(newEntity);
+      Level.insertNewEntity(newEntity);
       iterator.remove();
     }
   

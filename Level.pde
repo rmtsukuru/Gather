@@ -45,8 +45,22 @@ static class Level {
     newEntities = new LinkedList();
   }
 
+  // This is the general method to call for having some entity or other game effect spawn a new entity.
   static void addEntity(Entity entity) {
     newEntities.add(entity);
+  }
+  
+  // This method directly inserts the entity into the list based on its z-index. Should not be called from within other entities.
+  static void insertNewEntity(Entity entity) {
+    ListIterator<Entity> iterator = entities.listIterator();
+    while (iterator.hasNext()) {
+      Entity temp = iterator.next();
+      if (entity.zIndex() >= temp.zIndex()) {
+        iterator.add(entity);
+        return;
+      }
+    }
+    iterator.add(entity);
   }
   
   static void drawTiles() {
