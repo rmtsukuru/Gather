@@ -1,6 +1,6 @@
 class Bullet extends PlayerAttack {
   
-  static final int WIDTH = 16;
+  static final int WIDTH = 12;
   static final int HEIGHT = 8;
   static final int SPEED = 18;
   static final int DAMAGE = 30;
@@ -61,5 +61,9 @@ class Bullet extends PlayerAttack {
     if (other instanceof Enemy) {
       this.delete();
     }
+  }
+  
+  void renderGraphics() {
+    Graphics.drawImage("bullet0.png", x, y, !facingRight);
   }
 }
