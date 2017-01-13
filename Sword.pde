@@ -71,6 +71,6 @@ class Sword extends PlayerAttack {
     else if (timer < TTL * 2 / 3) {
       frame = "sword2.png";
     }
-    Graphics.drawImage(frame, x + (player.facingRight ? 0 : width - WIDTH), y, !player.facingRight);
+    Graphics.drawImage(frame, x + 3 + (player.facingRight ? 0 : width - WIDTH), y, !player.facingRight);
   }
 }
