@@ -62,4 +62,15 @@ class Sword extends PlayerAttack {
     }
     this.y = player.y + Player.BLADE_HEIGHT;
   }
+  
+  void renderGraphics() {
+    String frame = "sword0.png";
+    if (width > WIDTH * 0.8) {
+      frame = "sword1.png";
+    }
+    else if (timer < TTL * 2 / 3) {
+      frame = "sword2.png";
+    }
+    Graphics.drawImage(frame, x + (player.facingRight ? 0 : width - WIDTH), y, !player.facingRight);
+  }
 }
