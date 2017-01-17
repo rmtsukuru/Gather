@@ -117,8 +117,8 @@ class Enemy extends Actor {
     }
   }
   
-  void draw() {
-    super.draw();
+  void renderGraphics() {
+    Graphics.drawImage("enemy0.png", x, y, !facingRight);
     if (health < maxHealth) {
       Graphics.drawBar((int) x - 8, (int) y - 18, width + 16, 13, (float) health / maxHealth, HP_BAR_COLOR);
     }
