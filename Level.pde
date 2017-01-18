@@ -63,6 +63,11 @@ static class Level {
     iterator.add(entity);
   }
   
+  static void drawBackground() {
+    parent.background(20, 20, 60);
+    Graphics.drawFixedImage("bg0.png", 0, 0);
+  }
+  
   static void drawTiles() {
     int minX = gridIndex(Graphics.cameraX);
     int maxX = gridIndex(Graphics.cameraX + SCREEN_WIDTH);

@@ -56,12 +56,20 @@ static class Graphics {
   }
   
   static void drawImage(String filename, float x, float y) {
-    drawImage(filename, x, y, false);
+    drawImage(filename, x, y, false, false);
+  }
+  
+  static void drawFixedImage(String filename, float x, float y) {
+    drawImage(filename, x, y, false, true);
   }
   
   static void drawImage(String filename, float x, float y, boolean flip) {
+    drawImage(filename, x, y, flip, false);
+  }
+  
+  static void drawImage(String filename, float x, float y, boolean flip, boolean fixed) {
     PImage image = fetchImage(filename);
-    drawImage(image, x, y, image.width, image.height, flip);
+    drawImage(image, x, y, image.width, image.height, flip, fixed);
   }
   
   static void drawImage(String filename, float x, float y, float width, float height) {
@@ -74,11 +82,17 @@ static class Graphics {
   }
   
   static void drawImage(PImage image, float x, float y, float width, float height, boolean flip) {
+    drawImage(image, x, y, width, height, flip, false);
+  }
+  
+  static void drawImage(PImage image, float x, float y, float width, float height, boolean flip, boolean fixed) {
     parent.pushMatrix();
     int flipMultiplier = flip ? -1 : 1;
     float offset = flip ? -2 * (x - cameraX) : 0;
     parent.scale(flipMultiplier, 1);
-    parent.translate(x - cameraX, y - cameraY);
+    if (!fixed) {
+      parent.translate(x - cameraX, y - cameraY);
+    }
     parent.image(image, 0 + offset, 0, flipMultiplier * width, height);
     parent.popMatrix();
   }

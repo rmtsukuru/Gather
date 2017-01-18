@@ -71,8 +71,7 @@ class GameScreen implements Screen {
       Gather.instance.screen = new PauseScreen();
     }
     
-    background(20, 20, 60);
-
+    Level.drawBackground();
     Level.drawTiles();
     
     handleSpawning();
@@ -110,8 +109,7 @@ class PauseScreen extends GameScreen {
       Gather.instance.screen = new GameScreen();
     }
     
-    background(20, 20, 60);
-
+    Level.drawBackground();
     Level.drawTiles();
       
     for (Entity entity : Level.entities) {
@@ -141,7 +139,7 @@ class WinScreen implements Screen {
     else {
       winTimer--;
       
-      background(20, 20, 60);
+      Level.drawBackground();
       Level.drawTiles();
       
       for (Entity entity : Level.entities) {
@@ -165,7 +163,7 @@ class DeathScreen implements Screen {
       Gather.instance.reset();
     }
     else {
-      background(20, 20, 60);
+      Level.drawBackground();
       Level.drawTiles();
       
       for (Entity entity : Level.entities) {
