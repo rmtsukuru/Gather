@@ -121,10 +121,10 @@ class Player extends Actor {
       this.goingDown = Input.holdKey(DOWN);
       this.goingUp = Input.holdKey(UP);
       
-      if (Input.pressKey(' ')) {
+      if (Input.pressKey(' ') || Input.pressKey(UP)) {
         this.jumping = true;
       }
-      else if (Input.releaseKey(' ')) {
+      else if (Input.releaseKey(' ') || Input.releaseKey(UP)) {
         this.jumping = false;
       }
     }
