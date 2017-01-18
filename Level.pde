@@ -73,7 +73,7 @@ static class Level {
         if (i < tiles.length && j < tiles[i].length && tiles[i][j] == 1) {
           parent.stroke(155, 120, 120);
           parent.fill(70, 0, 150);
-          Graphics.drawRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+          Graphics.drawImage("tile2.png", j * TILE_SIZE, i * TILE_SIZE);
         }
       }
     }
