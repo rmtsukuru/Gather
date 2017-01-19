@@ -175,6 +175,10 @@ class HealthPack extends Powerup {
   String getBoonText() {
     return "HP +" + HEAL_AMOUNT;
   }
+  
+  void renderGraphics() {
+    Graphics.drawImage("medkit0.png", x, y, 20, 20);
+  }
 }
 
 class Armor extends Powerup {
