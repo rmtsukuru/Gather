@@ -61,7 +61,7 @@ void reset() {
 void draw() {
   textFont(Graphics.getFont());
   if (DEBUG && Input.pressKey('w')) {
-    Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
+    Level.addEntity(Level.setRandomSpawnPosition(getRandomPowerup(0, 0), player));
   }
   if (player.x > TUTORIAL_CUTOFF) {
     hideTutorial = true;
