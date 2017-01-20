@@ -177,7 +177,7 @@ class HealthPack extends Powerup {
   }
   
   void renderGraphics() {
-    Graphics.drawImage("medkit0.png", x, y, 20, 20);
+    Graphics.drawImage("medkit0.png", x, y - 2, 19, 19);
   }
 }
 
