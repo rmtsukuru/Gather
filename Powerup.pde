@@ -240,6 +240,10 @@ class Shield extends Powerup {
   String getBoonText() {
     return "SHIELD";
   }
+  
+  void renderGraphics() {
+    Graphics.drawImage("shield0.png", x, y - 2, 19, 19);
+  }
 }
 
 class Artifact extends Powerup {
