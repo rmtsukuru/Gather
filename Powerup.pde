@@ -119,6 +119,10 @@ class Ammo extends Powerup {
   String getBoonText() {
     return "AMMO +" + BULLET_AMOUNT;
   }
+  
+  void renderGraphics() {
+    Graphics.drawImage("ammo0.png", x, y - 3, 19, 19);
+  }
 }
 
 class Bandage extends Powerup {
@@ -150,7 +154,7 @@ class Bandage extends Powerup {
   }
   
   void renderGraphics() {
-    Graphics.drawImage("medkit0.png", x, y - 2, 15, 15);
+    Graphics.drawImage("medkit0.png", x, y - 3, 15, 15);
   }
 }
 
@@ -181,7 +185,7 @@ class HealthPack extends Powerup {
   }
   
   void renderGraphics() {
-    Graphics.drawImage("medkit0.png", x, y - 2, 19, 19);
+    Graphics.drawImage("medkit0.png", x, y - 3, 19, 19);
   }
 }
 
@@ -215,7 +219,7 @@ class Armor extends Powerup {
   }
   
   void renderGraphics() {
-    Graphics.drawImage("armor0.png", x, y - 2, 19, 19);
+    Graphics.drawImage("armor0.png", x, y - 3, 19, 19);
   }
 }
 
@@ -250,7 +254,7 @@ class Shield extends Powerup {
   }
   
   void renderGraphics() {
-    Graphics.drawImage("shield0.png", x, y - 2, 19, 19);
+    Graphics.drawImage("shield0.png", x, y - 3, 19, 19);
   }
 }
 
