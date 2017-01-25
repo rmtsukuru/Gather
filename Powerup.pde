@@ -293,4 +293,8 @@ class Artifact extends Powerup {
   String getBoonText() {
     return "ARTIFACT";
   }
+  
+  void renderGraphics() {
+    Graphics.drawImage("artifact0.png", x, y - 3, 19, 19);
+  }
 }
