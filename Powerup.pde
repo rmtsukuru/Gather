@@ -148,6 +148,10 @@ class Bandage extends Powerup {
   String getBoonText() {
     return "HP +" + HEAL_AMOUNT;
   }
+  
+  void renderGraphics() {
+    Graphics.drawImage("medkit0.png", x, y - 2, 15, 15);
+  }
 }
 
 class HealthPack extends Powerup {
@@ -208,6 +212,10 @@ class Armor extends Powerup {
   
   String getBoonText() {
     return "ARMOR";
+  }
+  
+  void renderGraphics() {
+    Graphics.drawImage("armor0.png", x, y - 2, 19, 19);
   }
 }
 
