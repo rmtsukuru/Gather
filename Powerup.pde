@@ -278,6 +278,7 @@ class Artifact extends Powerup {
     for (int i = 0; i < ENEMY_SUMMON_COUNT; i++) {
       Level.addEntity(Level.setRandomSpawnPosition(new Enemy(), player));
     }
+    Audio.play("Ashen Blur.mp3", true);
   }
   
   void spawn() {

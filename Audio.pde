@@ -12,9 +12,18 @@ static class Audio {
   }
   
   static void play(String filename) {
+    play(filename, false);
+  }
+  
+  static void play(String filename, boolean loop) {
     if (!MUTE) {
       SoundFile file = new SoundFile(parent, "audio/" + filename);
-      file.play();
+      if (loop) {
+        file.loop();
+      }
+      else {
+        file.play();
+      }
       file.amp(VOLUME);
     }
   }
