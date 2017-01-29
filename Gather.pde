@@ -56,6 +56,7 @@ void reset() {
   player = new Player(30, 100);
   healthBarTop = (float) player.health / Player.MAX_HP;
   Level.addEntity(player);
+  Audio.play("ambient1.mp3", true);
 }
 
 void draw() {

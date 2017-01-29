@@ -1,4 +1,5 @@
 import processing.sound.*;
+import ddf.minim.*;
 
 static class Audio {
   
@@ -7,8 +8,18 @@ static class Audio {
   
   static PApplet parent;
   
+  static Minim minim;
+  static AudioPlayer player;
+  
   static void configure(PApplet parent) {
     Audio.parent = parent;
+    minim = new Minim(parent);
+  }
+  
+  static void resetPlayer() {
+    if (player != null) {
+      player.pause();
+    }
   }
   
   static void play(String filename) {
@@ -17,14 +28,17 @@ static class Audio {
   
   static void play(String filename, boolean loop) {
     if (!MUTE) {
-      SoundFile file = new SoundFile(parent, "audio/" + filename);
       if (loop) {
-        file.loop();
+        resetPlayer();
+        player = minim.loadFile("audio/" + filename);
+        player.loop();
+        player.setVolume(VOLUME);
       }
       else {
+        SoundFile file = new SoundFile(parent, "audio/" + filename);
         file.play();
+        file.amp(VOLUME);
       }
-      file.amp(VOLUME);
     }
   }
 }
