@@ -31,7 +31,7 @@ class SnowParticle extends Actor {
   
   void update() {
     super.update();
-    if (y - Graphics.cameraY > SCREEN_HEIGHT) {
+    if (y > Level.mapHeight()) {
       delete();
     }
   }
