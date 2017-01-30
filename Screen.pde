@@ -131,6 +131,23 @@ class PauseScreen extends GameScreen {
   }
 }
 
+class TitleScreen implements Screen {
+  
+  public void draw() {
+    if (Input.pressKey('z') || Input.pressKey('x') || Input.pressKey(' ') || Input.pressKey('q') || Input.pressKey(ENTER) || Input.pressKey(RETURN)) {
+      reset();
+    }
+    
+    background(0);
+    fill(255);
+    textSize(150);
+    text("GATHER", 100, 250);
+    textSize(20);
+    text("PRESS SPACE TO BEGIN", 230, 300);
+    Input.resetKeys();
+  }
+}
+
 class WinScreen implements Screen {
   
   public void draw() {

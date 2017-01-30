@@ -27,6 +27,8 @@ static class Input {
     keys.add(DOWN);
     keys.add(LEFT);
     keys.add(RIGHT);
+    keys.add(ENTER);
+    keys.add(RETURN);
   
     for (Object k : keys) {
       keyState.put(k, new KeyState());

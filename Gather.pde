@@ -36,15 +36,20 @@ void setup() {
   frameRate(FPS);
   
   Gather.instance = this;
-  hideTutorial = false;
-  
-  reset();
+  initialize();
 }
 
-void reset() {
+void initialize() {
   Graphics.configure(this);
   Audio.configure(this);
   Input.configure(this);
+  
+  screen = new TitleScreen();
+  
+  hideTutorial = false;
+}
+
+void reset() {
   Level.configure(this);
   
   screen = new GameScreen();
@@ -62,20 +67,22 @@ void reset() {
 
 void draw() {
   textFont(Graphics.getFont());
-  if (DEBUG && Input.pressKey('w')) {
-    Level.addEntity(Level.setRandomSpawnPosition(getRandomPowerup(0, 0), player));
-  }
-  if (player.x > TUTORIAL_CUTOFF) {
-    hideTutorial = true;
-  }
+  if (screen instanceof GameScreen) {
+    if (DEBUG && Input.pressKey('w')) {
+      Level.addEntity(Level.setRandomSpawnPosition(getRandomPowerup(0, 0), player));
+    }
+    if (!hideTutorial && player.x > TUTORIAL_CUTOFF) {
+      hideTutorial = true;
+    }
   
-  if (screen instanceof GameScreen && player.health <= 0) {
-    screen = new DeathScreen();
-    player.hidden = true;
-  } 
-  else if (screen instanceof GameScreen && player.hasArtifact && (player.x == 0 || player.x + player.width == Level.mapWidth())) {
-    screen = new WinScreen();
-    player.hidden = true;
+    if (player.health <= 0) {
+      screen = new DeathScreen();
+      player.hidden = true;
+    } 
+    else if (player.hasArtifact && (player.x == 0 || player.x + player.width == Level.mapWidth())) {
+      screen = new WinScreen();
+      player.hidden = true;
+    }
   }
   
   screen.draw();
