@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
 
-static final boolean DEBUG = true;
+static final boolean DEBUG = false;
 
 static final int SCREEN_WIDTH = 640;
 static final int SCREEN_HEIGHT = 480;
