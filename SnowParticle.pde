@@ -7,6 +7,9 @@ void spawnInitialSnow() {
 
 class SnowParticle extends Actor {
   static final int MAX_VELOCITY = 4;
+  static final int TTL = FPS * 60;
+  
+  int timer;
   
   SnowParticle() {
     super();
@@ -19,6 +22,7 @@ class SnowParticle extends Actor {
     
     // X velocity should be in range of -1 * MAX_VELOCITY to MAX_VELOCITY.
     xVelocity = (float) (Math.random() * 2 * MAX_VELOCITY) - MAX_VELOCITY;
+    timer = TTL;
   }
   
   int zIndex() {
@@ -27,12 +31,18 @@ class SnowParticle extends Actor {
   
   void setVelocity() {
     applyGravity();
+    Level.handleTileCollision(this);
   }
   
   void update() {
     super.update();
-    if (y > Level.mapHeight()) {
+    timer--;
+    if (y > Level.mapHeight() || timer <= 0) {
       delete();
     }
+  }
+  
+  void handleTileCollision() {
+    this.xVelocity = 0;
   }
 }
