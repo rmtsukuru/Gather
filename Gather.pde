@@ -8,6 +8,7 @@ static final boolean DEBUG = true;
 static final int SCREEN_WIDTH = 640;
 static final int SCREEN_HEIGHT = 480;
 static final int FPS = 60;
+
 static final int ENEMY_SPAWN_RATE = 2;
 static final float BASE_ENEMY_SPAWN_CHANCE = 0.1;
 static final float ENEMY_SPAWN_CHANCE_MINUTE_STEP = 0.15;
