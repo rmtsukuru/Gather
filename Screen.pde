@@ -47,6 +47,7 @@ class GameScreen implements Screen {
     fill(255);
     text("Z         REVOLVER   [AMMO:     " + player.bullets + "/" + player.reserveBullets + "]", 5, 44);
     text("X         SABER", 5, 64);
+    text("Q         PAUSE", 5, 84);
     
     String objectiveText;
     if (player.hasArtifact) {
@@ -55,10 +56,10 @@ class GameScreen implements Screen {
     else {
       objectiveText = "FIND AND COLLECT THE";
       fill(255, 0, 0);
-      text("ARTIFACT", 270, 84);
+      text("ARTIFACT", 270, 104);
     }
     fill(255);
-    text("OBJECTIVE:   " + objectiveText, 5, 84);
+    text("OBJECTIVE:   " + objectiveText, 5, 104);
     
     if (!hideTutorial) {
       text("USE ARROW KEYS TO MOVE LEFT AND RIGHT", 260, 140);
