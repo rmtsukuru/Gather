@@ -53,7 +53,12 @@ class Entity {
   
   // This draws the graphics directly without deciding whether or not it should.
   void renderGraphics() {
-    stroke(strokeColor);
+    if (strokeColor < 0) {
+      noStroke();
+    }
+    else {
+      stroke(strokeColor);
+    }
     fill(fillColor);
     Graphics.drawRect(x, y, width, height, borderRadius);
   }

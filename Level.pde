@@ -55,7 +55,7 @@ static class Level {
     ListIterator<Entity> iterator = entities.listIterator();
     while (iterator.hasNext()) {
       Entity temp = iterator.next();
-      if (entity.zIndex() >= temp.zIndex()) {
+      if (entity.zIndex() <= temp.zIndex()) {
         iterator.add(entity);
         return;
       }

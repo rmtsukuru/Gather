@@ -16,6 +16,7 @@ static final int POWERUP_SPAWN_CAP = 16;
 static final float POWERUP_SPAWN_CHANCE = 0.6;
 static final int WIN_TIMER_FRAMES = (int) (1.5 * FPS);
 static final int TUTORIAL_CUTOFF = 400;
+static final float SNOWFLAKE_SPAWN_CHANCE = 0.6;
 
 Screen screen;
 
@@ -62,6 +63,8 @@ void reset() {
   player = new Player(30, 100);
   healthBarTop = (float) player.health / Player.MAX_HP;
   Level.addEntity(player);
+  spawnInitialSnow();
+  
   Audio.play("ambient1.mp3", true);
 }
 

@@ -26,6 +26,13 @@ class GameScreen implements Screen {
         }
       }
     }
+    
+    if (Math.random() < SNOWFLAKE_SPAWN_CHANCE) {
+      int snowflakes = (int) Math.ceil(Math.random() * 3) + 1;
+      for (int i = 0; i < snowflakes; i++) {
+        Level.addEntity(new SnowParticle());
+      }
+    }
   }
   
   void drawHud() {
