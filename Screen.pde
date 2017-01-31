@@ -72,6 +72,39 @@ class GameScreen implements Screen {
       text("USE ARROW KEYS TO MOVE LEFT AND RIGHT", 260, 140);
       text("PRESS SPACEBAR TO JUMP", 260, 170);
     }
+    
+    int seconds = counter / FPS;
+    int minutes = seconds / 60;
+    text(String.format("%02d", minutes) + ":" + String.format("%02d", seconds % 60), 595, 22);
+    String difficultyString = "DANGER: ";
+    if (player.hasArtifact || minutes >= 8) {
+      fill(255, 0, 0);
+      difficultyString += "TERMINAL";
+    }
+    else if (minutes < 1) {
+      difficultyString += "VERY LOW";
+    }
+    else if (minutes < 2) {
+      fill(200, 200, 255);
+      difficultyString += "LOW";
+    }
+    else if (minutes < 3) {
+      fill(100, 200, 100);
+      difficultyString += "MODERATE";
+    }
+    else if (minutes < 5) {
+      fill(200, 200, 100);
+      difficultyString += "HIGH";
+    }
+    else if (minutes < 6) {
+      fill(255, 150, 100);
+      difficultyString += "VERY HIGH";
+    }
+    else if (minutes < 8) {
+      fill(255, 100, 100);
+      difficultyString += "EXTREME";
+    }
+    text(difficultyString, 530 - difficultyString.length() * 2, 42);
   }
   
   public void draw() {
