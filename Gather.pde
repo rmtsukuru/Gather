@@ -22,7 +22,7 @@ Screen screen;
 
 Player player;
 
-int counter = 0;
+int counter;
 int winTimer = WIN_TIMER_FRAMES;
 float healthBarTop;
 boolean hideTutorial;
@@ -55,6 +55,7 @@ void reset() {
   
   screen = new GameScreen();
   
+  counter = 0;
   spawnPowerups();
   Artifact artifact = new Artifact();
   artifact.spawn();
