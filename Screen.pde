@@ -85,7 +85,7 @@ class GameScreen implements Screen {
       difficultyString += "VERY LOW";
     }
     else if (minutes < 2) {
-      fill(200, 200, 255);
+      fill(110, 110, 255);
       difficultyString += "LOW";
     }
     else if (minutes < 3) {
