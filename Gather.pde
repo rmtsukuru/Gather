@@ -44,6 +44,7 @@ void initialize() {
   Graphics.configure(this);
   Audio.configure(this);
   Input.configure(this);
+  changeAppIcon("artifact0.png");
   
   screen = new TitleScreen();
   
@@ -90,4 +91,9 @@ void draw() {
   }
   
   screen.draw();
+}
+
+void changeAppIcon(String filename) {
+  PImage image = Graphics.fetchImage(filename);
+  surface.setIcon(image);
 }
