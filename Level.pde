@@ -201,81 +201,87 @@ static class Level {
   static boolean areColliding(Entity a, Entity b) {
     return a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
   }
+  
+  static float getHorizontalCollisionVelocity(Actor actor) {
+    if (actor.xVelocity < 0) {
+      // Left
+      int minTileX = gridIndex(actor.x + actor.xVelocity);
+      int maxTileX = gridIndex(actor.x + 1) - 1;
+      int minTileY = gridIndex(actor.y);
+      int maxTileY = gridIndex(actor.y + actor.height - 1);
+      
+      for (int i = maxTileX; i >= minTileX; i--) {
+        for (int j = minTileY; j <= maxTileY; j++) {
+          if (!isPassableTile(i, j)) {
+            return max(tileRight(i, j) - actor.x, actor.xVelocity);
+          }
+        }
+      }
+    }
+    else if (actor.xVelocity > 0) {
+      // Right
+      int minTileX = gridIndex(actor.x + actor.width - 1) + 1;
+      int maxTileX = gridIndex(actor.x + actor.width + actor.xVelocity);
+      int minTileY = gridIndex(actor.y);
+      int maxTileY = gridIndex(actor.y + actor.height - 1);
+      
+      for (int i = minTileX; i <= maxTileX; i++) {
+        for (int j = minTileY; j <= maxTileY; j++) {
+          if (!isPassableTile(i, j)) {
+            return min(tileLeft(i, j) - (actor.x + actor.width), actor.xVelocity);
+          }
+        }
+      }
+    }
+    return actor.xVelocity;
+  }
+  
+  static float getVerticalCollisionVelocity(Actor actor) {
+    float tempX = actor.x + actor.xVelocity;
+      
+    if (actor.yVelocity < 0) {
+      // Top
+      int minTileY = gridIndex(actor.y + actor.yVelocity);
+      int maxTileY = gridIndex(actor.y) - 1;
+      int minTileX = gridIndex(tempX);
+      int maxTileX = gridIndex(tempX + actor.width - 1);
+      
+      for (int j = maxTileY; j >= minTileY; j--) {
+        for (int i = minTileX; i <= maxTileX; i++) {
+          if (!isPassableTile(i, j)) {
+            return max(tileBottom(i, j) - actor.y, actor.yVelocity);
+          }
+        }
+      }
+    }
+    else if (actor.yVelocity > 0) {
+      // Bottom
+      int minTileY = gridIndex(actor.y + actor.height - 1) + 1;
+      int maxTileY = gridIndex(actor.y + actor.height + actor.yVelocity);
+      int minTileX = gridIndex(tempX);
+      int maxTileX = gridIndex(tempX + actor.width - 1);
+      
+      for (int j = minTileY; j <= maxTileY; j++) {
+        for (int i = minTileX; i <= maxTileX; i++) {
+          if (!isPassableTile(i, j)) {
+            if (!actor.goingUp) {
+              actor.onGround = true;
+              actor.jumping = false;
+            }
+            return min(tileTop(i, j) - (actor.y + actor.height), actor.yVelocity);
+          }
+        }
+      }
+    }
+    return actor.yVelocity;
+  }
 
   static float getCollisionVelocity(boolean horizontal, Actor actor) {
     if (horizontal) {
-      // Horizontal
-      if (actor.xVelocity < 0) {
-        // Left
-        int minTileX = gridIndex(actor.x + actor.xVelocity);
-        int maxTileX = gridIndex(actor.x + 1) - 1;
-        int minTileY = gridIndex(actor.y);
-        int maxTileY = gridIndex(actor.y + actor.height - 1);
-        
-        for (int i = maxTileX; i >= minTileX; i--) {
-          for (int j = minTileY; j <= maxTileY; j++) {
-            if (!isPassableTile(i, j)) {
-              return max(tileRight(i, j) - actor.x, actor.xVelocity);
-            }
-          }
-        }
-      }
-      else if (actor.xVelocity > 0) {
-        // Right
-        int minTileX = gridIndex(actor.x + actor.width - 1) + 1;
-        int maxTileX = gridIndex(actor.x + actor.width + actor.xVelocity);
-        int minTileY = gridIndex(actor.y);
-        int maxTileY = gridIndex(actor.y + actor.height - 1);
-        
-        for (int i = minTileX; i <= maxTileX; i++) {
-          for (int j = minTileY; j <= maxTileY; j++) {
-            if (!isPassableTile(i, j)) {
-              return min(tileLeft(i, j) - (actor.x + actor.width), actor.xVelocity);
-            }
-          }
-        }
-      }
-      return actor.xVelocity;
+      return getHorizontalCollisionVelocity(actor);
     }
     else {
-      // Vertical
-      float tempX = actor.x + actor.xVelocity;
-      
-      if (actor.yVelocity < 0) {
-        // Top
-        int minTileY = gridIndex(actor.y + actor.yVelocity);
-        int maxTileY = gridIndex(actor.y) - 1;
-        int minTileX = gridIndex(tempX);
-        int maxTileX = gridIndex(tempX + actor.width - 1);
-        
-        for (int j = maxTileY; j >= minTileY; j--) {
-          for (int i = minTileX; i <= maxTileX; i++) {
-            if (!isPassableTile(i, j)) {
-              return max(tileBottom(i, j) - actor.y, actor.yVelocity);
-            }
-          }
-        }
-      }
-      else if (actor.yVelocity > 0) {
-        // Bottom
-        int minTileY = gridIndex(actor.y + actor.height - 1) + 1;
-        int maxTileY = gridIndex(actor.y + actor.height + actor.yVelocity);
-        int minTileX = gridIndex(tempX);
-        int maxTileX = gridIndex(tempX + actor.width - 1);
-        
-        for (int j = minTileY; j <= maxTileY; j++) {
-          for (int i = minTileX; i <= maxTileX; i++) {
-            if (!isPassableTile(i, j)) {
-              if (!actor.goingUp) {
-                actor.onGround = true;
-                actor.jumping = false;
-              }
-              return min(tileTop(i, j) - (actor.y + actor.height), actor.yVelocity);
-            }
-          }
-        }
-      }
-      return actor.yVelocity;  
+       return getVerticalCollisionVelocity(actor);
     }
   }
   
